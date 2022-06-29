@@ -1,8 +1,8 @@
 import axios, { AxiosResponse } from "axios";
 import useSWR from "swr";
-import { LoginForm } from ".";
 import Cookies from 'js-cookie';
-import { RegisterForm } from "./register";
+import { RegisterForm } from "../pages/register";
+import { LoginForm } from "../pages";
 
 const TitleId = "76C22";
 

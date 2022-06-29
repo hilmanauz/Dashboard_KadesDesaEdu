@@ -17,9 +17,9 @@ import {
 import React from "react";
 import { useForm } from "react-hook-form";
 import Router from "next/router";
-import useClient from "./useClient";
-import CustomSelect from "./components/CustomSelect";
 import _ from "lodash";
+import useClient from "../engines/useClient";
+import CustomSelect from "../components/CustomSelect";
 
 export type FormDefinition = {
   umur: number | null;

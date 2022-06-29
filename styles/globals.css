@@ -1,0 +1,23 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+@font-face {
+  font-family: FuturaHandwritten;
+  src: url("../public/FuturaHandwritten.ttf") format("truetype");
+}
+@font-face {
+  font-family: MatSaleh;
+  src: url("../public/MatSaleh.ttf") format("truetype");
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}

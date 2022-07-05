@@ -27,15 +27,26 @@ const gridRadius = "20px";
 
 const percentageCount = (value: number) => Math.round((value / 24) * 100);
 
+const profileTitle = [
+  "Nama",
+  "Umur",
+  "Jenis kelamin",
+  "Institusi",
+  "Kota",
+  "NIP",
+];
+
 const Home: NextPage = () => {
   const client = useClient();
   const validateToken = client.validateEntityToken();
   const userData = client.getUserData();
   const EntityToken = Cookies.get("EntityToken");
+  console.log(userData);
   React.useEffect(() => {
-    if (!validateToken.data) return;
-    validateToken.data.data?.error && !EntityToken && Router.push("/login");
-  }, [validateToken, EntityToken]);
+    if (!validateToken.data && !userData.error) return;
+    if ((validateToken.data.data?.error && !EntityToken) || userData.error)
+      Router.push("/login");
+  }, [validateToken, EntityToken, userData.error]);
 
   const personalityLevelPercentage = React.useMemo(() => {
     if (!userData.data?.dataLogin) return;
@@ -71,6 +82,16 @@ const Home: NextPage = () => {
     });
   }, [userData.data?.dataLogin]);
 
+  const profile: { title: string; value: string }[] = React.useMemo(() => {
+    if (!userData.data?.dataLogin?.profile) return;
+    return JSON.parse(userData.data.dataLogin.profile?.Value).map(
+      (val: string, i: number) => ({
+        title: profileTitle[i],
+        value: val,
+      })
+    );
+  }, [userData.data?.dataLogin]);
+
   const personalityResult = React.useMemo(() => {
     if (!personalityLevelPercentage) return;
     return _.sortBy(personalityLevelPercentage, [
@@ -87,7 +108,7 @@ const Home: NextPage = () => {
     Cookies.remove("PlayFabId");
     Router.push("/login");
   }, []);
-  console.log(userData.data);
+
   if (!userData.data) return <></>;
 
   return (
@@ -150,42 +171,14 @@ const Home: NextPage = () => {
                   flexDirection={"column"}
                   alignItems={"flex-start"}
                 >
-                  <HStack>
-                    <Heading fontSize={["sm", "3xl"]}>Nama :</Heading>
-                    <Text noOfLines={1}>
-                      {userData.data?.dataLogin.nama?.Value}
-                    </Text>
-                  </HStack>
-                  <HStack>
-                    <Heading fontSize={["sm", "3xl"]} noOfLines={1}>
-                      Umur :
-                    </Heading>
-                    <Text>{userData.data?.dataLogin.umur?.Value}</Text>
-                  </HStack>
-                  <HStack>
-                    <Heading fontSize={["sm", "3xl"]} noOfLines={1}>
-                      Jenis kelamin :
-                    </Heading>
-                    <Text>{userData.data?.dataLogin.jenis_kelamin?.Value}</Text>
-                  </HStack>
-                  <HStack>
-                    <Heading fontSize={["sm", "3xl"]} noOfLines={1}>
-                      Institusi :
-                    </Heading>
-                    <Text>{userData.data?.dataLogin.institusi?.Value}</Text>
-                  </HStack>
-                  <HStack>
-                    <Heading fontSize={["sm", "3xl"]} noOfLines={1}>
-                      Kota :
-                    </Heading>
-                    <Text>{userData.data?.dataLogin.kota?.Value}</Text>
-                  </HStack>
-                  <HStack>
-                    <Heading fontSize={["sm", "3xl"]} noOfLines={1}>
-                      NIP :
-                    </Heading>
-                    <Text>{userData.data?.dataLogin.NIP?.Value}</Text>
-                  </HStack>
+                  {profile?.map((section) => (
+                    <HStack key={section.value}>
+                      <Heading fontSize={["sm", "3xl"]}>
+                        {section.title} :
+                      </Heading>
+                      <Text noOfLines={1}>{section.value}</Text>
+                    </HStack>
+                  ))}
                 </Center>
                 <Spacer />
                 <Button
@@ -248,79 +241,87 @@ const Home: NextPage = () => {
                   <Heading fontSize={"28px"}>RESULT</Heading>
                 </VStack>
                 <VStack width={"100%"} spacing={5}>
-                  <Grid
-                    h="250px"
-                    width={"70%"}
-                    templateRows="repeat(2, 1fr)"
-                    templateColumns="repeat(6, 1fr)"
-                    borderRadius={"25px"}
-                    border={"3px solid black"}
-                    backgroundColor={"white"}
-                    gap={"0px"}
-                  >
-                    <GridItem
-                      rowSpan={2}
-                      colSpan={2}
-                      border={"2px solid black"}
-                      borderRadius={`${gridRadius} 0px 0px ${gridRadius}`}
-                    >
-                      <Center width={"full"} height={"full"}>
-                        <VStack spacing={0}>
-                          <Heading fontSize={"28px"}>DISC</Heading>
-                          <Heading fontSize={"28px"}>Personality</Heading>
-                        </VStack>
-                      </Center>
-                    </GridItem>
-                    {personalityLevelPercentage?.map(([key, value]) => (
-                      <GridItem
-                        key={key}
-                        rowSpan={1}
-                        colSpan={1}
-                        backgroundColor={value.backgroundColor}
-                        border={"2px solid black"}
-                        borderRadius={
-                          key === "C" ? `0px ${gridRadius} 0px 0px` : ""
-                        }
-                      >
-                        <Center width={"full"} height={"full"}>
-                          <Heading fontSize={"80px"} color={"white"}>
-                            {key}
-                          </Heading>
-                        </Center>
-                      </GridItem>
-                    ))}
-                    {personalityLevelPercentage?.map(([key, value]) => (
-                      <GridItem
-                        key={key}
-                        rowSpan={1}
-                        colSpan={1}
+                  {userData.data.dataLogin.level1.Value === "False" ? (
+                    <Box boxSize={"50%"}>
+                      <Image src={"./Empty_state.png"} alt="Dan Abramov" />
+                    </Box>
+                  ) : (
+                    <>
+                      <Grid
+                        h="250px"
+                        width={"70%"}
+                        templateRows="repeat(2, 1fr)"
+                        templateColumns="repeat(6, 1fr)"
+                        borderRadius={"25px"}
+                        border={"3px solid black"}
                         backgroundColor={"white"}
-                        border={"2px solid black"}
-                        borderRadius={
-                          key === "C" ? `0px 0px ${gridRadius} 0px` : ""
-                        }
+                        gap={"0px"}
                       >
-                        <Center width={"full"} height={"full"}>
-                          <Heading fontSize={"45px"} color={"black"}>
-                            {value.value}%
-                          </Heading>
-                        </Center>
-                      </GridItem>
-                    ))}
-                  </Grid>
-                  <HStack width={"75%"} justifyContent={"center"} gap={"8"}>
-                    {personalityLevelPercentage?.map(([key, value]) => (
-                      <HStack key={key}>
-                        <Box
-                          boxSize={"20px"}
-                          borderRadius={"50%"}
-                          backgroundColor={value.backgroundColor}
-                          border={"3px solid black"}
-                        />
-                        <Heading fontSize={"18px"}>{value.title}</Heading>
+                        <GridItem
+                          rowSpan={2}
+                          colSpan={2}
+                          border={"2px solid black"}
+                          borderRadius={`${gridRadius} 0px 0px ${gridRadius}`}
+                        >
+                          <Center width={"full"} height={"full"}>
+                            <VStack spacing={0}>
+                              <Heading fontSize={"28px"}>DISC</Heading>
+                              <Heading fontSize={"28px"}>Personality</Heading>
+                            </VStack>
+                          </Center>
+                        </GridItem>
+                        {personalityLevelPercentage?.map(([key, value]) => (
+                          <GridItem
+                            key={key}
+                            rowSpan={1}
+                            colSpan={1}
+                            backgroundColor={value.backgroundColor}
+                            border={"2px solid black"}
+                            borderRadius={
+                              key === "C" ? `0px ${gridRadius} 0px 0px` : ""
+                            }
+                          >
+                            <Center width={"full"} height={"full"}>
+                              <Heading fontSize={"80px"} color={"white"}>
+                                {key}
+                              </Heading>
+                            </Center>
+                          </GridItem>
+                        ))}
+                        {personalityLevelPercentage?.map(([key, value]) => (
+                          <GridItem
+                            key={key}
+                            rowSpan={1}
+                            colSpan={1}
+                            backgroundColor={"white"}
+                            border={"2px solid black"}
+                            borderRadius={
+                              key === "C" ? `0px 0px ${gridRadius} 0px` : ""
+                            }
+                          >
+                            <Center width={"full"} height={"full"}>
+                              <Heading fontSize={"45px"} color={"black"}>
+                                {value.value}%
+                              </Heading>
+                            </Center>
+                          </GridItem>
+                        ))}
+                      </Grid>
+                      <HStack width={"75%"} justifyContent={"center"} gap={"8"}>
+                        {personalityLevelPercentage?.map(([key, value]) => (
+                          <HStack key={key}>
+                            <Box
+                              boxSize={"20px"}
+                              borderRadius={"50%"}
+                              backgroundColor={value.backgroundColor}
+                              border={"3px solid black"}
+                            />
+                            <Heading fontSize={"18px"}>{value.title}</Heading>
+                          </HStack>
+                        ))}
                       </HStack>
-                    ))}
-                  </HStack>
+                    </>
+                  )}
                 </VStack>
               </VStack>
               <VStack width={"100%"} spacing={6}>
@@ -622,37 +623,45 @@ const Home: NextPage = () => {
               <Heading color={"white"}>Nilai Akhir</Heading>
             </Box>
           </Box>
-          <VStack height={"100%"} width={"100%"}>
-            <Center>
-              <Heading fontSize={"27px"}>Nilai akhir anda adalah</Heading>
-            </Center>
-            <HStack flex={1} height={"full"} width={"full"}>
-              <Center width={"25%"}>
-                <Image
-                  src={`./Personality_${personalityResult?.[0]}.png`}
-                  alt="Dan Abramov"
-                  objectFit={"cover"}
-                />
+          <VStack height={"100%"} width={"100%"} justifyContent={"center"}>
+            {userData.data.dataLogin.level1.Value === "False" ? (
+              <Center boxSize={"80%"}>
+                <Image src={"./Empty_state.png"} alt="Dan Abramov" />
               </Center>
-              <Spacer />
-              <VStack alignItems={"flex-start"} width={"70%"}>
-                <Heading
-                  fontSize={"27px"}
-                  letterSpacing={"0.3px"}
-                  noOfLines={1}
-                >
-                  DISC Personality: {personalityResult?.[1].title}
-                </Heading>
-                <Text
-                  fontSize={"18.5px"}
-                  letterSpacing={"0.3px"}
-                  textAlign={"justify"}
-                  lineHeight={"6"}
-                >
-                  {personalityResult?.[1].description}
-                </Text>
-              </VStack>
-            </HStack>
+            ) : (
+              <>
+                <Center>
+                  <Heading fontSize={"27px"}>Nilai akhir anda adalah</Heading>
+                </Center>
+                <HStack flex={1} height={"full"} width={"full"}>
+                  <Center width={"25%"}>
+                    <Image
+                      src={`./Personality_${personalityResult?.[0]}.png`}
+                      alt="Dan Abramov"
+                      objectFit={"cover"}
+                    />
+                  </Center>
+                  <Spacer />
+                  <VStack alignItems={"flex-start"} width={"70%"}>
+                    <Heading
+                      fontSize={"27px"}
+                      letterSpacing={"0.3px"}
+                      noOfLines={1}
+                    >
+                      DISC Personality: {personalityResult?.[1].title}
+                    </Heading>
+                    <Text
+                      fontSize={"18.5px"}
+                      letterSpacing={"0.3px"}
+                      textAlign={"justify"}
+                      lineHeight={"6"}
+                    >
+                      {personalityResult?.[1].description}
+                    </Text>
+                  </VStack>
+                </HStack>
+              </>
+            )}
           </VStack>
         </GridItem>
       </Grid>

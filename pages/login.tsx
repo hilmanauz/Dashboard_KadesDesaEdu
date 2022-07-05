@@ -36,6 +36,8 @@ function Login() {
         const dataLogin = await client.login(data);
         if (dataLogin.data) {
           const entityToken = await client.getEntityToken();
+          Cookies.remove("PlayFabId");
+          Cookies.remove("SessionTicket");
           Cookies.set("EntityToken", entityToken.data.EntityToken);
           Cookies.set("SessionTicket", dataLogin.data.SessionTicket);
           Cookies.set("PlayFabId", dataLogin.data.PlayFabId);

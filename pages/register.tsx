@@ -99,12 +99,11 @@ function Register() {
           {
             PlayFabId: dataRegister.data.PlayFabId,
             Data: {
-              nama: data.nama || "",
-              umur: data.umur || null,
-              jenis_kelamin: data.jenis_kelamin || "",
-              NIP: data.NIP || null,
-              institusi: data.institusi || "",
-              kota: data.kota || "",
+              profile: `["${data.nama || ""}", "${data.umur || ""}", "${
+                data.jenis_kelamin || ""
+              }", "${data.NIP || ""}", "${data.institusi || ""}", "${
+                data.kota || ""
+              }"]`,
             },
             Permission: "Private",
           },
@@ -131,7 +130,6 @@ function Register() {
     },
     [client, toast]
   );
-  console.log(formRef.formState.isSubmitted, formData.page);
 
   const handleNextForm = React.useCallback(() => {
     setTimeout(() => {

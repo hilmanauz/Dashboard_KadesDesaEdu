@@ -41,7 +41,6 @@ const Home: NextPage = () => {
   const validateToken = client.validateEntityToken();
   const userData = client.getUserData();
   const EntityToken = Cookies.get("EntityToken");
-  console.log(userData);
   React.useEffect(() => {
     if (!validateToken.data && !userData.error) return;
     if ((validateToken.data.data?.error && !EntityToken) || userData.error)

@@ -17,6 +17,7 @@ import Router from "next/router";
 import Cookies from "js-cookie";
 import _ from "lodash";
 import useClient from "../engines/useClient";
+import { css } from "@emotion/react";
 
 export type LoginForm = {
   username: string;
@@ -48,31 +49,35 @@ const Home: NextPage = () => {
   }, [validateToken, EntityToken, userData.error]);
 
   const personalityLevelPercentage = React.useMemo(() => {
-    if (!userData.data?.dataLogin) return;
+    if (!userData.data?.dataLogin?.personalityData) return;
+    const personality = userData.data?.dataLogin.personalityData.Value.replace(
+      /\[|\]/g,
+      ""
+    ).split(",");
     return Object.entries({
       D: {
-        value: percentageCount(userData.data?.dataLogin.dominance.Value),
+        value: percentageCount(personality[0]),
         title: "Dominance",
         backgroundColor: "#F9AF1A",
         description:
           "Orang-orang dengan kepribadian Dominance memiliki kecenderungan karakter yang dominan, kuat, dengan ego yang tinggi. They are independent and risk taker. Mereka mudah merasa bosan dengan rutinitas, menyukai tantangan dan inovasi. Kepribadian DISC ini juga menyukai authority, responsibility, decision making, problem solving, multi tasking, maupun hal-hal lain yang membuatnya menjadi lebih dominan.",
       },
       I: {
-        value: percentageCount(userData.data?.dataLogin.influence.Value),
+        value: percentageCount(personality[1]),
         title: "Influence",
         backgroundColor: "#F90807",
         description:
           "Karakter DISC ini memiliki pengaruh yang besar bagi sekitarnya. Kepercayaan dirinya, antusiasmenya, selera humornya, dan optimismenya membawa semangat bagi lingkungannya. Sebagai negosiator yang handal, orang-orang dengan kepribadian Influence memiliki kemampuan persuasif yang bagus. Mereka menyukai popularitas, sehingga mereka sulit menerima penolakan dari orang lain.",
       },
       S: {
-        value: percentageCount(userData.data?.dataLogin.steadiness.Value),
+        value: percentageCount(personality[2]),
         title: "Steadiness",
         backgroundColor: "#1E75BB",
         description:
           "Konsisten, tenang, dan sabar adalah beberapa karakter yang menggambarkan kepribadian DISC yang satu ini. Sebaliknya, orang-orang dengan kepribadian Steadiness sulit menerima perubahan dan butuh waktu lama untuk menyesuaikan diri dengan lingkungan baru. Maka, mereka menyukai lingkungan yang memberi rasa aman tanpa perubahan yang mendadak.",
       },
       C: {
-        value: percentageCount(userData.data?.dataLogin.compliance.Value),
+        value: percentageCount(personality[3]),
         title: "Compliance",
         backgroundColor: "#3DB508",
         description:
@@ -133,7 +138,8 @@ const Home: NextPage = () => {
           outline={"6px solid black"}
           outlineOffset={"-11px"}
           position={"relative"}
-          padding={"30px"}
+          padding={"1.5vw"}
+          paddingTop={"1.9vw"}
           paddingBottom={"10px"}
           backgroundPosition={"center"}
           backgroundImage={"./Artboard.png"}
@@ -147,7 +153,7 @@ const Home: NextPage = () => {
             textAlign={"center"}
           >
             <Box
-              width={"250px"}
+              width={"fit-content"}
               marginLeft={"auto"}
               marginRight={"auto"}
               borderRadius={"16px"}
@@ -158,7 +164,13 @@ const Home: NextPage = () => {
                 "linear-gradient(0deg, rgba(39,111,187,1) 80%, rgba(93,149,196,1) 100%, rgba(93,149,196,1) 100%)"
               }
             >
-              <Heading color={"white"}>Profile</Heading>
+              <Heading
+                color={"white"}
+                paddingInline={"2vw"}
+                fontSize={{ base: "1.5vw", md: "2vw", lg: "2.2vw" }}
+              >
+                Profile
+              </Heading>
             </Box>
           </Box>
           <Center height={"100%"} width={"100%"}>
@@ -172,10 +184,21 @@ const Home: NextPage = () => {
                 >
                   {profile?.map((section) => (
                     <HStack key={section.value}>
-                      <Heading fontSize={["sm", "3xl"]}>
+                      <Heading
+                        fontSize={{ base: "0.5vw", md: "1vw", lg: "1.5vw" }}
+                      >
                         {section.title} :
                       </Heading>
-                      <Text noOfLines={1}>{section.value}</Text>
+                      <Text
+                        fontSize={{
+                          base: "0.25vw",
+                          md: "0.75vw",
+                          lg: "1.25vw",
+                        }}
+                        noOfLines={1}
+                      >
+                        {section.value}
+                      </Text>
                     </HStack>
                   ))}
                 </Center>
@@ -214,7 +237,7 @@ const Home: NextPage = () => {
             textAlign={"center"}
           >
             <Box
-              width={"250px"}
+              width={"fit-content"}
               marginLeft={"auto"}
               marginRight={"auto"}
               borderRadius={"16px"}
@@ -225,7 +248,13 @@ const Home: NextPage = () => {
                 "linear-gradient(0deg, rgba(39,111,187,1) 80%, rgba(93,149,196,1) 100%, rgba(93,149,196,1) 100%)"
               }
             >
-              <Heading color={"white"}>Status</Heading>
+              <Heading
+                color={"white"}
+                paddingInline={"2vw"}
+                fontSize={{ base: "1.5vw", md: "2vw", lg: "2.2vw" }}
+              >
+                Status
+              </Heading>
             </Box>
           </Box>
           <Center width={"100%"} height={"100%"} padding={"30px"}>
@@ -236,8 +265,12 @@ const Home: NextPage = () => {
             >
               <VStack width={"100%"} spacing={6}>
                 <VStack spacing={0}>
-                  <Heading fontSize={"28px"}>PERSONALITY</Heading>
-                  <Heading fontSize={"28px"}>RESULT</Heading>
+                  <Heading fontSize={{ base: "0.5vw", md: "1vw", lg: "1.5vw" }}>
+                    PERSONALITY
+                  </Heading>
+                  <Heading fontSize={{ base: "0.5vw", md: "1vw", lg: "1.5vw" }}>
+                    RESULT
+                  </Heading>
                 </VStack>
                 <VStack width={"100%"} spacing={5}>
                   {userData.data.dataLogin.level1.Value === "False" ? (
@@ -247,8 +280,8 @@ const Home: NextPage = () => {
                   ) : (
                     <>
                       <Grid
-                        h="250px"
-                        width={"70%"}
+                        h="25vh"
+                        width={"37vw"}
                         templateRows="repeat(2, 1fr)"
                         templateColumns="repeat(6, 1fr)"
                         borderRadius={"25px"}
@@ -264,8 +297,24 @@ const Home: NextPage = () => {
                         >
                           <Center width={"full"} height={"full"}>
                             <VStack spacing={0}>
-                              <Heading fontSize={"28px"}>DISC</Heading>
-                              <Heading fontSize={"28px"}>Personality</Heading>
+                              <Heading
+                                fontSize={{
+                                  base: "0.5vw",
+                                  md: "1vw",
+                                  lg: "1.55vw",
+                                }}
+                              >
+                                DISC
+                              </Heading>
+                              <Heading
+                                fontSize={{
+                                  base: "0.5vw",
+                                  md: "1vw",
+                                  lg: "1.55vw",
+                                }}
+                              >
+                                Personality
+                              </Heading>
                             </VStack>
                           </Center>
                         </GridItem>
@@ -281,7 +330,14 @@ const Home: NextPage = () => {
                             }
                           >
                             <Center width={"full"} height={"full"}>
-                              <Heading fontSize={"80px"} color={"white"}>
+                              <Heading
+                                fontSize={{
+                                  base: "1.5vw",
+                                  md: "2.5vw",
+                                  lg: "3.5vw",
+                                }}
+                                color={"white"}
+                              >
                                 {key}
                               </Heading>
                             </Center>
@@ -299,14 +355,29 @@ const Home: NextPage = () => {
                             }
                           >
                             <Center width={"full"} height={"full"}>
-                              <Heading fontSize={"45px"} color={"black"}>
+                              <Heading
+                                fontSize={{
+                                  base: "0.75vw",
+                                  md: "1.25vw",
+                                  lg: "2vw",
+                                }}
+                                color={"black"}
+                              >
                                 {value.value}%
                               </Heading>
                             </Center>
                           </GridItem>
                         ))}
                       </Grid>
-                      <HStack width={"75%"} justifyContent={"center"} gap={"8"}>
+                      <HStack
+                        justifyContent={"center"}
+                        gap={["4", "8"]}
+                        css={css`
+                          @media (max-width: 1440px) {
+                            gap: 0.6rem;
+                          }
+                        `}
+                      >
                         {personalityLevelPercentage?.map(([key, value]) => (
                           <HStack key={key}>
                             <Box
@@ -315,7 +386,15 @@ const Home: NextPage = () => {
                               backgroundColor={value.backgroundColor}
                               border={"3px solid black"}
                             />
-                            <Heading fontSize={"18px"}>{value.title}</Heading>
+                            <Heading
+                              fontSize={{
+                                base: "0.45vw",
+                                md: "0.65vw",
+                                lg: "0.95vw",
+                              }}
+                            >
+                              {value.title}
+                            </Heading>
                           </HStack>
                         ))}
                       </HStack>
@@ -325,35 +404,65 @@ const Home: NextPage = () => {
               </VStack>
               <VStack width={"100%"} spacing={6}>
                 <VStack spacing={0}>
-                  <Heading fontSize={"28px"}>QUIZ LEVEL 2</Heading>
-                  <Heading fontSize={"28px"}>RESULT</Heading>
+                  <Heading fontSize={{ base: "0.5vw", md: "1vw", lg: "1.5vw" }}>
+                    QUIZ LEVEL 2
+                  </Heading>
+                  <Heading fontSize={{ base: "0.5vw", md: "1vw", lg: "1.5vw" }}>
+                    RESULT
+                  </Heading>
                 </VStack>
-                <HStack width={"60%"} spacing={8}>
+                <HStack
+                  width={{ base: "80%", md: "80%", lg: "80%" }}
+                  spacing={8}
+                >
                   <HStack
                     backgroundColor={"white"}
-                    width={"35%"}
                     borderRadius={"10px"}
                     border={"5px solid black"}
-                    paddingX={"20px"}
-                    paddingTop={"20px"}
+                    paddingX={{ base: "0.5vw", md: "1vw", lg: "1vw" }}
+                    paddingY={{ base: "0.5vh", md: "1vh", lg: "1vh" }}
                   >
                     <Center flexDirection={"column"}>
-                      <Heading fontSize={"20px"}>Benar</Heading>
-                      <Heading fontSize={"5rem"} color={"#1E75BB"}>
+                      <Heading
+                        fontSize={{ base: "0.5vw", md: "1vw", lg: "1.1vw" }}
+                      >
+                        Benar
+                      </Heading>
+                      <Heading
+                        fontSize={{ base: "0.5vw", md: "1vw", lg: "4vw" }}
+                        css={css`
+                          @media (max-width: 1440px) {
+                            font-size: 5vw;
+                          }
+                        `}
+                        color={"#1E75BB"}
+                      >
                         7
                       </Heading>
                     </Center>
                     <Spacer />
                     <Center flexDirection={"column"}>
-                      <Heading fontSize={"20px"}>Salah</Heading>
-                      <Heading fontSize={"5rem"} color={"#FE0400"}>
+                      <Heading
+                        fontSize={{ base: "0.5vw", md: "1vw", lg: "1.1vw" }}
+                      >
+                        Salah
+                      </Heading>
+                      <Heading
+                        fontSize={{ base: "0.5vw", md: "1vw", lg: "4vw" }}
+                        css={css`
+                          @media (max-width: 1440px) {
+                            font-size: 5vw;
+                          }
+                        `}
+                        color={"#FE0400"}
+                      >
                         3
                       </Heading>
                     </Center>
                   </HStack>
                   <Grid
-                    h="150px"
-                    width={"65%"}
+                    h={"20vh"}
+                    width={"26.5vw"}
                     templateRows="repeat(3, 1fr)"
                     templateColumns="repeat(8, 1fr)"
                     borderRadius={"12px"}
@@ -596,7 +705,8 @@ const Home: NextPage = () => {
           outline={"6px solid black"}
           outlineOffset={"-11px"}
           position={"relative"}
-          padding={"30px"}
+          padding={"1.5vw"}
+          paddingTop={"1.9vw"}
           backgroundImage={"./Artboard.png"}
           backgroundSize={"cover"}
         >
@@ -608,7 +718,7 @@ const Home: NextPage = () => {
             textAlign={"center"}
           >
             <Box
-              width={"250px"}
+              width={"fit-content"}
               marginLeft={"auto"}
               marginRight={"auto"}
               borderRadius={"16px"}
@@ -619,7 +729,13 @@ const Home: NextPage = () => {
                 "linear-gradient(0deg, rgba(39,111,187,1) 80%, rgba(93,149,196,1) 100%, rgba(93,149,196,1) 100%)"
               }
             >
-              <Heading color={"white"}>Nilai Akhir</Heading>
+              <Heading
+                color={"white"}
+                paddingInline={"2vw"}
+                fontSize={{ base: "1.5vw", md: "2vw", lg: "2.2vw" }}
+              >
+                Nilai Akhir
+              </Heading>
             </Box>
           </Box>
           <VStack height={"100%"} width={"100%"} justifyContent={"center"}>
@@ -628,38 +744,47 @@ const Home: NextPage = () => {
                 <Image src={"./Empty_state.png"} alt="Dan Abramov" />
               </Center>
             ) : (
-              <>
-                <Center>
-                  <Heading fontSize={"27px"}>Nilai akhir anda adalah</Heading>
+              <VStack height={"100%"} width={"100%"}>
+                <Center flexDirection={"column"}>
+                  <Heading fontSize={{ base: "0.5vw", md: "1vw", lg: "1.5vw" }}>
+                    Nilai akhir anda adalah
+                  </Heading>
+                  <Heading
+                    fontSize={{ base: "0.5vw", md: "1vw", lg: "1.5vw" }}
+                    letterSpacing={"0.3px"}
+                    noOfLines={1}
+                  >
+                    DISC Personality: {personalityResult?.[1].title}
+                  </Heading>
                 </Center>
                 <HStack flex={1} height={"full"} width={"full"}>
                   <Center width={"25%"}>
                     <Image
                       src={`./Personality_${personalityResult?.[0]}.png`}
+                      width={"90%"}
                       alt="Dan Abramov"
                       objectFit={"cover"}
                     />
                   </Center>
-                  <Spacer />
-                  <VStack alignItems={"flex-start"} width={"70%"}>
-                    <Heading
-                      fontSize={"27px"}
-                      letterSpacing={"0.3px"}
-                      noOfLines={1}
-                    >
-                      DISC Personality: {personalityResult?.[1].title}
-                    </Heading>
+                  <Center width={"72%"}>
                     <Text
-                      fontSize={"18.5px"}
+                      height={"full"}
+                      fontSize={{ base: "0.1vw", md: "0.5vw", lg: "1.15vw" }}
+                      css={css`
+                        @media (max-width: 1440px) {
+                          font-size: 0.95vw;
+                          font-weight: 500;
+                        }
+                      `}
                       letterSpacing={"0.3px"}
                       textAlign={"justify"}
                       lineHeight={"6"}
                     >
                       {personalityResult?.[1].description}
                     </Text>
-                  </VStack>
+                  </Center>
                 </HStack>
-              </>
+              </VStack>
             )}
           </VStack>
         </GridItem>

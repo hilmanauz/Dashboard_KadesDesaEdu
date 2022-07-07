@@ -80,12 +80,8 @@ function Register() {
             PlayFabId: dataRegister.data.PlayFabId,
             Data: {
               alreadyLevel2: "False",
-              compliance: 0,
-              dominance: 0,
-              influence: 0,
-              personality: 0,
               score: 0,
-              steadiness: 0,
+              personalityData: "[0,0,0,0]",
               totalQuestion: 0,
               level1: "False",
               missionData:

@@ -44,7 +44,7 @@ const Home: NextPage = () => {
   const EntityToken = Cookies.get("EntityToken");
   React.useEffect(() => {
     if (!validateToken.data && !userData.error) return;
-    if ((validateToken.data.data?.error && !EntityToken) || userData.error)
+    if ((validateToken.data?.data?.error && !EntityToken) || userData.error)
       Router.push("/login");
   }, [validateToken, EntityToken, userData.error]);
 

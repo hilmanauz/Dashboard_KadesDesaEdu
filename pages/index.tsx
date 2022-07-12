@@ -263,7 +263,12 @@ const Home: NextPage = () => {
               height={"100%"}
               justifyContent={"space-around"}
             >
-              <VStack width={"100%"} spacing={6}>
+              <VStack
+                width={"100%"}
+                spacing={
+                  userData.data.dataLogin.level1.Value === "False" ? 3 : 6
+                }
+              >
                 <VStack spacing={0}>
                   <Heading fontSize={{ base: "0.5vw", md: "1vw", lg: "1.5vw" }}>
                     PERSONALITY
@@ -272,9 +277,9 @@ const Home: NextPage = () => {
                     RESULT
                   </Heading>
                 </VStack>
-                <VStack width={"100%"} spacing={5}>
+                <VStack width={"100%"}>
                   {userData.data.dataLogin.level1.Value === "False" ? (
-                    <Box boxSize={"50%"}>
+                    <Box h="40%" width={"40%"}>
                       <Image src={"./Empty_state.png"} alt="Dan Abramov" />
                     </Box>
                   ) : (
@@ -740,7 +745,7 @@ const Home: NextPage = () => {
           </Box>
           <VStack height={"100%"} width={"100%"} justifyContent={"center"}>
             {userData.data.dataLogin.level1.Value === "False" ? (
-              <Center boxSize={"80%"}>
+              <Center boxSize={"75%"}>
                 <Image src={"./Empty_state.png"} alt="Dan Abramov" />
               </Center>
             ) : (

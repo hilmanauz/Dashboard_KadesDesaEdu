@@ -70,16 +70,15 @@ function Login() {
   }, []);
 
   return (
-    <VStack
+    <Center
+      flexDirection={"column"}
       width={"100vw"}
       height={"100vh"}
       position={"relative"}
       backgroundImage={"./Background.png"}
     >
-      <br />
-      <br />
       <Box
-        width={"38vw"}
+        width={"650px"}
         backgroundImage={"./Back_logo.png"}
         backgroundPosition={"center"}
         backgroundSize={"cover"}
@@ -99,7 +98,7 @@ function Login() {
         backgroundPosition={"center"}
         backgroundImage={"./Artboard.png"}
         backgroundSize={"cover"}
-        width={"35vw"}
+        width={"600px"}
       >
         <form onSubmit={formRef.handleSubmit(onSubmit)}>
           <FormControl display={"flex"}>
@@ -197,7 +196,7 @@ function Login() {
           </HStack>
         </form>
       </Box>
-    </VStack>
+    </Center>
   );
 }
 

@@ -43,10 +43,10 @@ const Home: NextPage = () => {
   const userData = client.getUserData();
   const EntityToken = Cookies.get("EntityToken");
   React.useEffect(() => {
-    if (!validateToken.data && !userData.error) return;
+    if (validateToken.data && userData.error && userData.data) return;
     if ((validateToken.data?.data?.error && !EntityToken) || userData.error)
       Router.push("/login");
-  }, [validateToken, EntityToken, userData.error]);
+  }, [validateToken, EntityToken, userData.error, userData.data]);
 
   const personalityLevelPercentage = React.useMemo(() => {
     if (!userData.data?.dataLogin?.personalityData) return;

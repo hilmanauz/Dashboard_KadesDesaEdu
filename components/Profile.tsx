@@ -20,8 +20,8 @@ const profileTitle = [
   "Umur",
   "Jenis kelamin",
   "NIP",
-  "Kota",
   "Institusi",
+  "Kota",
 ];
 
 function Profile({
@@ -72,7 +72,7 @@ function Profile({
     >
       <Box
         position={"absolute"}
-        top={-8}
+        top={{ md: -6, lg: -8 }}
         left={0}
         right={0}
         textAlign={"center"}
@@ -92,7 +92,7 @@ function Profile({
           <Heading
             color={"white"}
             paddingInline={"2vw"}
-            fontSize={{ base: "1.5vw", md: "2vw", lg: "2.2vw" }}
+            fontSize={{ base: "1.5vw", md: "2.2vw", lg: "2.2vw" }}
           >
             Profile
           </Heading>
@@ -100,10 +100,14 @@ function Profile({
       </Box>
       <Center height={"100%"} width={"100%"}>
         <HStack flex={1} height={"100%"} spacing={0}>
-          <Center width={"25%"} height={"full"}>
+          <Center width={{ base: "25%", md: "33%", lg: "25%" }} height={"full"}>
             <Image src="./PakKades.png" alt="Dan Abramov" width={"full"} />
           </Center>
-          <VStack width={"75%"} height={"full"} spacing={0}>
+          <VStack
+            width={{ base: "75%", md: "67%", lg: "75%" }}
+            height={"full"}
+            spacing={0}
+          >
             <Center
               height={"full"}
               width={"full"}
@@ -112,13 +116,16 @@ function Profile({
             >
               {profile?.map((section) => (
                 <HStack key={section.value}>
-                  <Heading fontSize={{ base: "0.5vw", md: "1vw", lg: "1.5vw" }}>
-                    {section.title} :
+                  <Heading
+                    fontSize={{ base: "0.5vw", md: "1.6vw", lg: "1.5vw" }}
+                  >
+                    {section.title}:
                   </Heading>
                   <Text
+                    flex={1}
                     fontSize={{
                       base: "0.25vw",
-                      md: "0.75vw",
+                      md: "1.3vw",
                       lg: "1.25vw",
                     }}
                   >
@@ -131,7 +138,6 @@ function Profile({
             <Button
               alignSelf={"flex-end"}
               colorScheme={"red"}
-              size={"lg"}
               padding={"10px"}
               onClick={handleSignOut}
             >

@@ -80,7 +80,7 @@ function Status({
     >
       <Box
         position={"absolute"}
-        top={-8}
+        top={{ md: -6, lg: -8 }}
         left={0}
         right={0}
         textAlign={"center"}
@@ -100,7 +100,7 @@ function Status({
           <Heading
             color={"white"}
             paddingInline={"2vw"}
-            fontSize={{ base: "1.5vw", md: "2vw", lg: "2.2vw" }}
+            fontSize={{ base: "1.5vw", md: "2.2vw", lg: "2.2vw" }}
           >
             Status
           </Heading>
@@ -117,10 +117,10 @@ function Status({
             spacing={userData.data?.dataLogin.level1.Value === "False" ? 3 : 6}
           >
             <VStack spacing={0}>
-              <Heading fontSize={{ base: "0.5vw", md: "1vw", lg: "1.5vw" }}>
+              <Heading fontSize={{ base: "0.5vw", md: "1.7vw", lg: "1.5vw" }}>
                 PERSONALITY
               </Heading>
-              <Heading fontSize={{ base: "0.5vw", md: "1vw", lg: "1.5vw" }}>
+              <Heading fontSize={{ base: "0.5vw", md: "1.7vw", lg: "1.5vw" }}>
                 RESULT
               </Heading>
             </VStack>
@@ -133,7 +133,7 @@ function Status({
                 <>
                   <Grid
                     h="25vh"
-                    width={"37vw"}
+                    width={{ base: "37vw", md: "42vw", lg: "37vw" }}
                     templateRows="repeat(2, 1fr)"
                     templateColumns="repeat(6, 1fr)"
                     borderRadius={"25px"}
@@ -152,7 +152,7 @@ function Status({
                           <Heading
                             fontSize={{
                               base: "0.5vw",
-                              md: "1vw",
+                              md: "1.55vw",
                               lg: "1.55vw",
                             }}
                           >
@@ -161,7 +161,7 @@ function Status({
                           <Heading
                             fontSize={{
                               base: "0.5vw",
-                              md: "1vw",
+                              md: "1.55vw",
                               lg: "1.55vw",
                             }}
                           >
@@ -185,7 +185,7 @@ function Status({
                           <Heading
                             fontSize={{
                               base: "1.5vw",
-                              md: "2.5vw",
+                              md: "3.5vw",
                               lg: "3.5vw",
                             }}
                             color={"white"}
@@ -210,7 +210,7 @@ function Status({
                           <Heading
                             fontSize={{
                               base: "0.75vw",
-                              md: "1.25vw",
+                              md: "2vw",
                               lg: "2vw",
                             }}
                             color={"black"}
@@ -223,9 +223,9 @@ function Status({
                   </Grid>
                   <HStack
                     justifyContent={"center"}
-                    gap={["4", "8"]}
+                    gap={{ base: "4", md: "0", lg: "8" }}
                     css={css`
-                      @media (max-width: 1440px) {
+                      @media only screen and (min-width: 1280px) and (max-width: 1440px) {
                         gap: 0.6rem;
                       }
                     `}
@@ -241,7 +241,7 @@ function Status({
                         <Heading
                           fontSize={{
                             base: "0.45vw",
-                            md: "0.65vw",
+                            md: "1.1vw",
                             lg: "0.95vw",
                           }}
                         >
@@ -256,58 +256,45 @@ function Status({
           </VStack>
           <VStack width={"100%"} spacing={6}>
             <VStack spacing={0}>
-              <Heading fontSize={{ base: "0.5vw", md: "1vw", lg: "1.5vw" }}>
+              <Heading fontSize={{ base: "0.5vw", md: "1.7vw", lg: "1.5vw" }}>
                 QUIZ LEVEL 2
               </Heading>
-              <Heading fontSize={{ base: "0.5vw", md: "1vw", lg: "1.5vw" }}>
+              <Heading fontSize={{ base: "0.5vw", md: "1.7vw", lg: "1.5vw" }}>
                 RESULT
               </Heading>
             </VStack>
-            <HStack width={{ base: "80%", md: "80%", lg: "80%" }} spacing={8}>
+            <HStack width={{ base: "80%", md: "90%", lg: "80%" }} spacing={8}>
               <HStack
                 backgroundColor={"white"}
                 borderRadius={"10px"}
                 border={"5px solid black"}
+                width={"25%"}
+                height={"full"}
                 paddingX={{ base: "0.5vw", md: "1vw", lg: "1vw" }}
                 paddingY={{ base: "0.5vh", md: "1vh", lg: "1vh" }}
               >
-                <Center flexDirection={"column"}>
-                  <Heading fontSize={{ base: "0.5vw", md: "1vw", lg: "1.1vw" }}>
-                    Benar
+                <Center flexDirection={"column"} height={"full"} width={"full"}>
+                  <Heading
+                    fontSize={{ base: "0.5vw", md: "2.5vw", lg: "2.3vw" }}
+                  >
+                    Score
                   </Heading>
                   <Heading
-                    fontSize={{ base: "0.5vw", md: "1vw", lg: "4vw" }}
+                    fontSize={{ base: "0.5vw", md: "6vw", lg: "5vw" }}
                     css={css`
-                      @media (max-width: 1440px) {
+                      @media only screen and (min-width: 1280px) and (max-width: 1440px) {
                         font-size: 5vw;
                       }
                     `}
                     color={"#1E75BB"}
                   >
-                    7
-                  </Heading>
-                </Center>
-                <Spacer />
-                <Center flexDirection={"column"}>
-                  <Heading fontSize={{ base: "0.5vw", md: "1vw", lg: "1.1vw" }}>
-                    Salah
-                  </Heading>
-                  <Heading
-                    fontSize={{ base: "0.5vw", md: "1vw", lg: "4vw" }}
-                    css={css`
-                      @media (max-width: 1440px) {
-                        font-size: 5vw;
-                      }
-                    `}
-                    color={"#FE0400"}
-                  >
-                    3
+                    70
                   </Heading>
                 </Center>
               </HStack>
               <Grid
                 h={"20vh"}
-                width={"26.5vw"}
+                width={"75%"}
                 templateRows="repeat(3, 1fr)"
                 templateColumns="repeat(8, 1fr)"
                 borderRadius={"12px"}

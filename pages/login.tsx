@@ -102,12 +102,12 @@ function Login() {
       >
         <form onSubmit={formRef.handleSubmit(onSubmit)}>
           <FormControl display={"flex"}>
-            <FormLabel fontSize={"28px"}>Username</FormLabel>
+            <FormLabel fontSize={"2rem"}>Username</FormLabel>
             <Input
               {...formRef.register("username")}
               borderColor={"black"}
               marginX={"15px"}
-              fontSize={"30px"}
+              fontSize={"2rem"}
               outline={"5px solid black"}
               _focus={{ border: "1px solid black" }}
               _hover={{ border: "1px solid black" }}
@@ -117,13 +117,13 @@ function Login() {
           </FormControl>
           <br />
           <FormControl display={"flex"}>
-            <FormLabel fontSize={"28px"}>Password</FormLabel>
+            <FormLabel fontSize={"2rem"}>Password</FormLabel>
             <Input
               {...formRef.register("password")}
               type={"password"}
               borderColor={"black"}
               marginX={"15px"}
-              fontSize={"30px"}
+              fontSize={"2rem"}
               outline={"5px solid black"}
               _focus={{ border: "1px solid black" }}
               _hover={{ border: "1px solid black" }}
@@ -142,7 +142,7 @@ function Login() {
           >
             <Button
               width={"35%"}
-              height={"8vh"}
+              height={{ lg: "80px", md: "90px" }}
               type="submit"
               variant={"unstyled"}
               borderRadius={"24px"}
@@ -169,7 +169,7 @@ function Login() {
             </Button>
             <Button
               width={"35%"}
-              height={"8vh"}
+              height={{ lg: "80px", md: "90px" }}
               variant={"unstyled"}
               borderRadius={"24px"}
               border={"8px solid white"}

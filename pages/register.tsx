@@ -166,7 +166,7 @@ function Register() {
       backgroundImage={"./Background.png"}
     >
       <Box
-        width={"30vw"}
+        width={"650px"}
         bg="rgb(233,224,182)"
         borderRadius={"50px"}
         border={"11px solid white"}
@@ -185,6 +185,7 @@ function Register() {
                 <FormControl>
                   <FormLabel fontSize={"25px"}>Nama</FormLabel>
                   <Input
+                    flex={1}
                     borderColor={"black"}
                     fontSize={"28px"}
                     outline={"5px solid black"}
@@ -199,6 +200,7 @@ function Register() {
                   <FormControl width={"50%"}>
                     <FormLabel fontSize={"25px"}>Umur</FormLabel>
                     <Input
+                      flex={1}
                       borderColor={"black"}
                       fontSize={"28px"}
                       outline={"5px solid black"}
@@ -212,7 +214,9 @@ function Register() {
                     />
                   </FormControl>
                   <FormControl width={"50%"}>
-                    <FormLabel fontSize={"25px"}>Jenis Kelamin</FormLabel>
+                    <FormLabel fontSize={"25px"} noOfLines={1}>
+                      Jenis Kelamin
+                    </FormLabel>
                     <CustomSelect
                       options={[
                         { label: "Laki-laki", value: "laki-laki" },
@@ -222,12 +226,14 @@ function Register() {
                         label: _.upperFirst(formData.jenis_kelamin),
                         value: formData.jenis_kelamin,
                       }}
+                      style={{ flex: 1 }}
                     />
                   </FormControl>
                 </HStack>
                 <FormControl>
                   <FormLabel fontSize={"25px"}>NIP</FormLabel>
                   <Input
+                    flex={1}
                     type={"number"}
                     borderColor={"black"}
                     fontSize={"28px"}
@@ -243,6 +249,7 @@ function Register() {
                 <FormControl>
                   <FormLabel fontSize={"25px"}>Institusi</FormLabel>
                   <Input
+                    flex={1}
                     borderColor={"black"}
                     fontSize={"28px"}
                     outline={"5px solid black"}
@@ -256,6 +263,7 @@ function Register() {
                 <FormControl>
                   <FormLabel fontSize={"25px"}>Kota</FormLabel>
                   <Input
+                    flex={1}
                     borderColor={"black"}
                     fontSize={"28px"}
                     outline={"5px solid black"}
@@ -275,6 +283,7 @@ function Register() {
                 <FormControl>
                   <FormLabel fontSize={"25px"}>Username</FormLabel>
                   <Input
+                    flex={1}
                     borderColor={"black"}
                     fontSize={"28px"}
                     outlineOffset={"-2px"}
@@ -301,6 +310,7 @@ function Register() {
                 <FormControl>
                   <FormLabel fontSize={"25px"}>E-mail</FormLabel>
                   <Input
+                    flex={1}
                     borderColor={"black"}
                     fontSize={"28px"}
                     outlineOffset={"-2px"}
@@ -332,6 +342,7 @@ function Register() {
                 <FormControl>
                   <FormLabel fontSize={"25px"}>Password</FormLabel>
                   <Input
+                    flex={1}
                     borderColor={"black"}
                     fontSize={"28px"}
                     outlineOffset={"-2px"}
@@ -363,6 +374,7 @@ function Register() {
                 <FormControl isInvalid={errors.confirmPassword ? true : false}>
                   <FormLabel fontSize={"25px"}>Confirm password</FormLabel>
                   <Input
+                    flex={1}
                     borderColor={"black"}
                     fontSize={"28px"}
                     outlineOffset={"-2px"}
@@ -405,7 +417,7 @@ function Register() {
                   ? handleBackToLogin
                   : handleBackToPreviousRegistration
               }
-              height={"8vh"}
+              height={{ lg: "80px", md: "90px" }}
               variant={"unstyled"}
               borderRadius={"24px"}
               border={"8px solid white"}
@@ -427,7 +439,7 @@ function Register() {
             <Button
               width={"35%"}
               type={formDisclosure.isOpen ? "submit" : undefined}
-              height={"8vh"}
+              height={{ lg: "80px", md: "90px" }}
               variant={"unstyled"}
               borderRadius={"24px"}
               border={"8px solid white"}

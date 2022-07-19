@@ -61,7 +61,7 @@ export default function useClient() {
           // @ts-ignore
           return error.response;
         }
-      }, { revalidateOnReconnect: true, revalidateOnFocus: true, revalidateOnMount: true });
+      }, { revalidateOnReconnect: true, revalidateOnFocus: true, revalidateOnMount: true, refreshWhenOffline: true, refreshInterval: 1000, refreshWhenHidden: true });
     },
     getEntityToken: async () => {
       const dataLogin = await axios.post(

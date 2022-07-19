@@ -3,12 +3,19 @@ import type { AppProps } from "next/app";
 import { ChakraProvider } from "@chakra-ui/react";
 import { extendTheme } from "@chakra-ui/react";
 
+const breakpoints = {
+  sm: "34em",
+  md: "60em",
+  lg: "76.8em",
+  xl: "144em",
+};
+
 const theme = extendTheme({
+  breakpoints,
   styles: {
     global: {
       body: {
         fontFamily: "FuturaHandwritten",
-        fontSize: "25px",
         letterSpacing: "5px",
         fontWeight: "500",
       },
@@ -22,7 +29,6 @@ const theme = extendTheme({
       },
       sizes: {
         lg: {
-          fontSize: "36px",
           letterSpacing: "0.5px",
         },
       },

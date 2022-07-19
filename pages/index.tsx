@@ -21,8 +21,7 @@ const Home: NextPage = () => {
   const EntityToken = Cookies.get("EntityToken");
   React.useEffect(() => {
     if (validateToken.data && userData.error && userData.data) return;
-    if ((validateToken.data?.data?.error && !EntityToken) || userData.error)
-      Router.push("/login");
+    if (validateToken.data?.data?.error && !EntityToken) Router.push("/login");
   }, [validateToken, EntityToken, userData.error, userData.data]);
 
   if (!userData.data) return <></>;
@@ -39,7 +38,7 @@ const Home: NextPage = () => {
         width={"90%"}
         templateRows="repeat(15, 1fr)"
         templateColumns="repeat(5, 1fr)"
-        gap={10}
+        gap={{ lg: 10, md: 6 }}
       >
         <Profile userData={userData} />
         <Status userData={userData} />

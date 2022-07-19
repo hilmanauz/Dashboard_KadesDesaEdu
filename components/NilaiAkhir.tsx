@@ -89,7 +89,7 @@ function NilaiAkhir({
       <Center height={"100%"} paddingX={"20px"} paddingTop={"20px"}>
         <Box
           position={"absolute"}
-          top={-8}
+          top={{ md: -5, lg: -8 }}
           left={0}
           right={0}
           textAlign={"center"}
@@ -109,7 +109,7 @@ function NilaiAkhir({
             <Heading
               color={"white"}
               paddingInline={"2vw"}
-              fontSize={{ base: "1.5vw", md: "2vw", lg: "2.2vw" }}
+              fontSize={{ base: "1.5vw", md: "2.2vw", lg: "2.2vw" }}
             >
               Nilai Akhir
             </Heading>
@@ -123,7 +123,7 @@ function NilaiAkhir({
           ) : (
             <VStack height={"100%"} width={"100%"}>
               <Center flexDirection={"column"}>
-                <Heading fontSize={{ base: "0.5vw", md: "1vw", lg: "1.5vw" }}>
+                <Heading fontSize={{ base: "0.5vw", md: "1.5vw", lg: "1.5vw" }}>
                   Nilai akhir anda adalah
                 </Heading>
               </Center>
@@ -138,24 +138,24 @@ function NilaiAkhir({
                 </Center>
                 <VStack width={"72%"}>
                   <Heading
-                    fontSize={{ base: "0.5vw", md: "1vw", lg: "1.5vw" }}
+                    fontSize={{ base: "0.5vw", md: "1.4vw", lg: "1.5vw" }}
                     letterSpacing={"0.3px"}
-                    noOfLines={1}
                   >
                     DISC Personality: {personalityResult?.[1].title}
                   </Heading>
                   <Text
                     height={"full"}
-                    fontSize={{ base: "0.1vw", md: "0.5vw", lg: "1.15vw" }}
+                    fontSize={{ base: "0.8vw", md: "1.1vw", lg: "1.1vw" }}
                     css={css`
-                      @media (max-width: 1440px) {
-                        font-size: 0.95vw;
+                      @media only screen and (min-width: 1280px) and (max-width: 1440px) {
+                        font-size: 1vw;
                         font-weight: 500;
+                        line-height: 1.5;
                       }
                     `}
                     letterSpacing={"0.3px"}
                     textAlign={"justify"}
-                    lineHeight={"6"}
+                    lineHeight={{ base: "6", md: "tall", lg: "6" }}
                   >
                     {personalityResult?.[1].description}
                   </Text>

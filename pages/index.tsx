@@ -20,18 +20,20 @@ const Home: NextPage = () => {
   const userData = client.getUserData();
   const EntityToken = Cookies.get("EntityToken");
   React.useEffect(() => {
-    if (validateToken.data && userData.error && userData.data) return;
+    if (userData.data) {
+      if (!userData.data.dataLogin?.profile) Router.push("/registers/form");
+    }
     if (validateToken.data?.data?.error && !EntityToken) Router.push("/login");
   }, [validateToken, EntityToken, userData.error, userData.data]);
 
-  if (!userData.data) return <></>;
+  if (!userData.data || !userData.data.dataLogin.profile) return <></>;
 
   return (
     <Center
       width={"100vw"}
       height={"100vh"}
       position={"relative"}
-      backgroundImage={"./Background.png"}
+      backgroundImage={"../Background.png"}
     >
       <Grid
         height={"90%"}

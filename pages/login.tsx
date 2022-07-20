@@ -66,7 +66,7 @@ function Login() {
   );
 
   const handleMoveToRegisterPage = React.useCallback(() => {
-    Router.push("/register");
+    Router.push("/registers/account");
   }, []);
 
   return (
@@ -139,11 +139,12 @@ function Login() {
             justifyContent={"center"}
             bottom={"-3vh"}
             left={0}
+            height={{ lg: "80px", md: "75px" }}
           >
             <Button
               width={"35%"}
-              height={{ lg: "80px", md: "90px" }}
               type="submit"
+              height={"full"}
               variant={"unstyled"}
               borderRadius={"24px"}
               border={"8px solid white"}
@@ -169,7 +170,7 @@ function Login() {
             </Button>
             <Button
               width={"35%"}
-              height={{ lg: "80px", md: "90px" }}
+              height={"full"}
               variant={"unstyled"}
               borderRadius={"24px"}
               border={"8px solid white"}

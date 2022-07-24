@@ -12,6 +12,7 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
+import { setCookie } from "cookies-next";
 import Cookies from "js-cookie";
 import _ from "lodash";
 import Router from "next/router";
@@ -19,7 +20,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import useClient from "../../engines/useClient";
 
-type RegisterForm = {
+export type RegisterForm = {
   username: string;
   email: string;
   password: string;
@@ -53,8 +54,24 @@ function Account() {
           password: data.password,
           username: data.username,
         });
-        Cookies.set("SessionTicket", dataRegister.data.SessionTicket);
-        Cookies.set("PlayFabId", dataRegister.data.PlayFabId);
+        await client.updatePlayerData(
+          {
+            PlayFabId: dataRegister.data.PlayFabId,
+            Data: {
+              alreadyLevel2: "False",
+              score: 0,
+              personalityData: "[0,0,0,0]",
+              totalQuestion: 0,
+              level1: "False",
+              missionData:
+                "[false, false, false, false, false, false, false, false]",
+            },
+            Permission: "Private",
+          },
+          dataRegister.data.SessionTicket || ""
+        );
+        setCookie("SessionTicket", dataRegister.data.SessionTicket);
+        setCookie("PlayFabId", dataRegister.data.PlayFabId);
         setIsLoading(false);
         toast({
           title: "Your account has been created successfully",

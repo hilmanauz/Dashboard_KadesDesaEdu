@@ -18,17 +18,14 @@ const percentageCount = (value: number) => Math.round((value / 24) * 100);
 function NilaiAkhir({
   userData,
 }: {
-  userData: SWRResponse<
-    {
-      dataLogin: any;
-      accountInfo: any;
-    },
-    any
-  >;
+  userData: {
+    dataLogin: any;
+    accountInfo: any;
+  };
 }) {
   const personalityLevelPercentage = React.useMemo(() => {
-    if (!userData.data?.dataLogin?.personalityData) return;
-    const personality = userData.data?.dataLogin.personalityData.Value.replace(
+    if (!userData.dataLogin?.personalityData) return;
+    const personality = userData.dataLogin.personalityData.Value.replace(
       /\[|\]/g,
       ""
     ).split(",");
@@ -62,7 +59,7 @@ function NilaiAkhir({
           "Orang-orang berkarakter Compliance biasanya tekun, sistematis, teliti, cermat, fokus pada ketepatan dan kualitas. Cenderung analitis dan kritis, sosok kepribadian DISC ini suka mengejar kualitas dengan standar yang tinggi dan mengerjakan tugas-tugas yang rinci. Karenanya, mereka menyukai batasan, prosedur, dan metode yang jelas.",
       },
     });
-  }, [userData.data?.dataLogin]);
+  }, [userData.dataLogin]);
 
   const personalityResult = React.useMemo(() => {
     if (!personalityLevelPercentage) return;
@@ -116,7 +113,7 @@ function NilaiAkhir({
           </Box>
         </Box>
         <VStack justifyContent={"center"}>
-          {userData.data?.dataLogin.level1.Value === "False" ? (
+          {userData.dataLogin.level1.Value === "False" ? (
             <Center boxSize={"75%"}>
               <Image src={"./Empty_state.png"} alt="Dan Abramov" />
             </Center>

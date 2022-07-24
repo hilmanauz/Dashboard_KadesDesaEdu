@@ -13,12 +13,13 @@ import {
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
+import { deleteCookie, getCookie } from "cookies-next";
 import Cookies from "js-cookie";
 import _ from "lodash";
 import Router from "next/router";
 import React from "react";
 import { useForm } from "react-hook-form";
-import CustomSelect from "../../components/CustomSelect";
+import CustomSelect, { SelectOption } from "../../components/CustomSelect";
 import useClient from "../../engines/useClient";
 
 export type FormDefinition = {
@@ -55,34 +56,24 @@ function Form() {
   const client = useClient();
   const userData = client.getUserData();
   const toast = useToast();
-  const SessionTicket = Cookies.get("SessionTicket");
-  const PlayFabId = Cookies.get("PlayFabId");
+  const SessionTicket = getCookie("SessionTicket") as string;
+  const PlayFabId = getCookie("PlayFabId");
   const formData = formRef.watch();
   const handleToLogin = React.useCallback(() => {
-    Cookies.remove("SessionTicket");
-    Cookies.remove("PlayFabId");
+    deleteCookie("SessionTicket");
+    deleteCookie("PlayFabId");
     Router.push("/login");
   }, []);
+  const handleChangeGender = React.useCallback(
+    (data: SelectOption) => {
+      formRef.setValue("jenis_kelamin", data.value);
+    },
+    [formRef]
+  );
   const onSubmit = React.useCallback(
     async (data: FormDefinition) => {
       setIsLoading(true);
       try {
-        await client.updatePlayerData(
-          {
-            PlayFabId: PlayFabId,
-            Data: {
-              alreadyLevel2: "False",
-              score: 0,
-              personalityData: "[0,0,0,0]",
-              totalQuestion: 0,
-              level1: "False",
-              missionData:
-                "[false, false, false, false, false, false, false, false]",
-            },
-            Permission: "Private",
-          },
-          SessionTicket || ""
-        );
         await client.updatePlayerData(
           {
             PlayFabId: PlayFabId,
@@ -97,18 +88,16 @@ function Form() {
           },
           SessionTicket || ""
         );
-        setIsLoading(false);
         toast({
           title: "Your account has been created successfully",
           status: "success",
-          duration: 1000,
+          duration: 2000,
         });
 
-        setTimeout(() => {
-          if (userData) Router.push("/");
-          else Router.push("/login");
-        }, 1000);
+        if (userData.data?.accountInfo) Router.push("/");
+        else Router.push("/login");
       } catch (error: any) {
+        toast.closeAll();
         setIsLoading(false);
         toast({
           title: error.response.data.errorMessage,
@@ -117,7 +106,7 @@ function Form() {
         });
       }
     },
-    [client, toast, SessionTicket, PlayFabId, userData]
+    [client, toast, SessionTicket, PlayFabId, userData.data]
   );
   return (
     <Center
@@ -186,6 +175,7 @@ function Form() {
                       label: _.upperFirst(formData.jenis_kelamin),
                       value: formData.jenis_kelamin,
                     }}
+                    onChange={handleChangeGender}
                     style={{ flex: 1 }}
                   />
                 </FormControl>

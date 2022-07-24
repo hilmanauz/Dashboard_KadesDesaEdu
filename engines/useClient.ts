@@ -1,10 +1,11 @@
 import axios, { AxiosResponse } from "axios";
 import useSWR from "swr";
 import Cookies from 'js-cookie';
-import { RegisterForm } from "../pages/register";
 import { LoginForm } from "../pages";
+import { RegisterForm } from "../pages/registers/account";
+import { getCookie } from "cookies-next";
 
-const TitleId = "76C22";
+export const TitleId = "76C22";
 
 
 type LoginInstance = {
@@ -46,7 +47,7 @@ export default function useClient() {
       // eslint-disable-next-line react-hooks/rules-of-hooks
       return useSWR(["validate", axios], async () => {
         try {
-          const EntityToken = Cookies.get("EntityToken");
+          const EntityToken = getCookie("EntityToken");
           const entityData = await axios.post(
             `https://${TitleId}.playfabapi.com/Authentication/ValidateEntityToken`,
             { EntityToken: EntityToken || "" },
@@ -78,8 +79,8 @@ export default function useClient() {
     getUserData: () => {
       // eslint-disable-next-line react-hooks/rules-of-hooks
       return useSWR(["getData"], async () => {
-        const SessionTicket = Cookies.get("SessionTicket") || "";
-        const PlayFabId = Cookies.get("PlayFabId") || "";
+        const SessionTicket = getCookie("SessionTicket") || "";
+        const PlayFabId = getCookie("PlayFabId") || "";
         const dataLogin = await axios.post(
           `https://${TitleId}.playfabapi.com/Client/GetUserData`,
           {},

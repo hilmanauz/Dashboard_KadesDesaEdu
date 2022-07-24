@@ -10,6 +10,7 @@ import {
   Image,
   Text,
 } from "@chakra-ui/react";
+import { deleteCookie } from "cookies-next";
 import Cookies from "js-cookie";
 import Router from "next/router";
 import React from "react";
@@ -27,29 +28,23 @@ const profileTitle = [
 function Profile({
   userData,
 }: {
-  userData: SWRResponse<
-    {
-      dataLogin: any;
-      accountInfo: any;
-    },
-    any
-  >;
+  userData: { dataLogin: any; accountInfo: any };
 }) {
   const profile: { title: string; value: string }[] = React.useMemo(() => {
-    if (!userData.data?.dataLogin?.profile) return;
-    return JSON.parse(userData.data.dataLogin.profile?.Value).map(
+    if (!userData.dataLogin?.profile) return;
+    return JSON.parse(userData.dataLogin.profile?.Value).map(
       (val: string, i: number) => ({
         title: profileTitle[i],
         value: val,
       })
     );
-  }, [userData.data?.dataLogin]);
+  }, [userData.dataLogin]);
 
   const handleSignOut = React.useCallback(() => {
-    Cookies.remove("EntityId");
-    Cookies.remove("SessionTicket");
-    Cookies.remove("EntityToken");
-    Cookies.remove("PlayFabId");
+    deleteCookie("EntityId");
+    deleteCookie("SessionTicket");
+    deleteCookie("EntityToken");
+    deleteCookie("PlayFabId");
     Router.push("/login");
   }, []);
 

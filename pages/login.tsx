@@ -14,8 +14,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { LoginForm } from ".";
 import Router from "next/router";
-import Cookies from "js-cookie";
 import useClient from "../engines/useClient";
+import { deleteCookie, setCookie } from "cookies-next";
 
 function Login() {
   const formRef = useForm<LoginForm>({
@@ -36,24 +36,22 @@ function Login() {
         const dataLogin = await client.login(data);
         if (dataLogin.data) {
           const entityToken = await client.getEntityToken();
-          Cookies.remove("PlayFabId");
-          Cookies.remove("SessionTicket");
-          Cookies.set("EntityToken", entityToken.data.EntityToken);
-          Cookies.set("SessionTicket", dataLogin.data.SessionTicket);
-          Cookies.set("PlayFabId", dataLogin.data.PlayFabId);
-          Cookies.set("EntityId", dataLogin.data.EntityToken.Entity.Id);
+          deleteCookie("PlayFabId");
+          deleteCookie("SessionTicket");
+          setCookie("EntityToken", entityToken.data.EntityToken);
+          setCookie("SessionTicket", dataLogin.data.SessionTicket);
+          setCookie("PlayFabId", dataLogin.data.PlayFabId);
+          setCookie("EntityId", dataLogin.data.EntityToken.Entity.Id);
         }
-        setIsLoading(false);
         toast({
           title: "Login successfull",
           status: "success",
-          duration: 1000,
+          duration: 2000,
         });
 
-        setTimeout(() => {
-          Router.push("/");
-        }, 1000);
+        Router.push("/");
       } catch (error: any) {
+        toast.closeAll();
         setIsLoading(false);
         toast({
           title: error?.response.data?.errorMessage,

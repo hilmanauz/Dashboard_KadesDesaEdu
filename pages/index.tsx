@@ -26,11 +26,12 @@ const Home = (
   const validateToken = client.validateEntityToken();
   const EntityToken = getCookie("EntityToken");
   React.useEffect(() => {
-    if (!props.dataLogin.profile) Router.push("/registers/form");
-    if (validateToken.data?.data?.error && !EntityToken) Router.push("/login");
+    if ((validateToken.data?.data?.error && !EntityToken) || !props.dataLogin)
+      Router.push("/login");
+    if (!props.dataLogin?.profile) Router.push("/registers/form");
   }, [validateToken, EntityToken, props.accountInfo, props.dataLogin]);
 
-  if (!props.dataLogin.profile) return <></>;
+  if (!props.dataLogin?.profile) return <></>;
 
   return (
     <Center
@@ -69,6 +70,7 @@ export const getServerSideProps: GetServerSideProps<{
         headers: {
           "X-Authorization": SessionTicket,
         },
+        withCredentials: true,
       }
     );
     const accountInfo = await axios.post(
@@ -79,6 +81,7 @@ export const getServerSideProps: GetServerSideProps<{
       {
         headers: {
           "X-Authorization": SessionTicket,
+          withCredentials: true,
         },
       }
     );

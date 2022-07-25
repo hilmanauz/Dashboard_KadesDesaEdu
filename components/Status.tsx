@@ -60,6 +60,10 @@ function Status({
       },
     });
   }, [userData.dataLogin]);
+  const scoreLevel2 = userData.dataLogin?.scoreData?.Value?.replace(
+    /\[|\]/g,
+    ""
+  ).split(",");
   return (
     <GridItem
       colSpan={3}
@@ -322,7 +326,7 @@ function Status({
                       border={"2px solid black"}
                     >
                       <Center width={"full"} height={"full"}>
-                        {userData.dataLogin?.scoreData?.Value?.[0] === 10 ? (
+                        {scoreLevel2?.[0] === 10 ? (
                           <Image
                             boxSize={"40px"}
                             src="./Right_Answer.png"
@@ -352,7 +356,7 @@ function Status({
                       border={"2px solid black"}
                     >
                       <Center width={"full"} height={"full"}>
-                        {userData.dataLogin?.scoreData?.Value?.[3] === 10 ? (
+                        {scoreLevel2?.[3] === 10 ? (
                           <Image
                             boxSize={"40px"}
                             src="./Right_Answer.png"
@@ -382,7 +386,7 @@ function Status({
                       border={"2px solid black"}
                     >
                       <Center width={"full"} height={"full"}>
-                        {userData.dataLogin?.scoreData?.Value?.[6] === 10 ? (
+                        {scoreLevel2?.[6] === 10 ? (
                           <Image
                             boxSize={"40px"}
                             src="./Right_Answer.png"
@@ -413,7 +417,7 @@ function Status({
                       borderRadius={"0px 8px 0px 0px"}
                     >
                       <Center width={"full"} height={"full"}>
-                        {userData.dataLogin?.scoreData?.Value?.[9] === 10 ? (
+                        {scoreLevel2?.[9] === 10 ? (
                           <Image
                             boxSize={"40px"}
                             src="./Right_Answer.png"
@@ -443,7 +447,7 @@ function Status({
                       border={"2px solid black"}
                     >
                       <Center width={"full"} height={"full"}>
-                        {userData.dataLogin?.scoreData?.Value?.[1] === 10 ? (
+                        {scoreLevel2?.[1] === 10 ? (
                           <Image
                             boxSize={"40px"}
                             src="./Right_Answer.png"
@@ -473,7 +477,7 @@ function Status({
                       border={"2px solid black"}
                     >
                       <Center width={"full"} height={"full"}>
-                        {userData.dataLogin?.scoreData?.Value?.[4] === 10 ? (
+                        {scoreLevel2?.[4] === 10 ? (
                           <Image
                             boxSize={"40px"}
                             src="./Right_Answer.png"
@@ -503,7 +507,7 @@ function Status({
                       border={"2px solid black"}
                     >
                       <Center width={"full"} height={"full"}>
-                        {userData.dataLogin?.scoreData?.Value?.[7] === 10 ? (
+                        {scoreLevel2?.[7] === 10 ? (
                           <Image
                             boxSize={"40px"}
                             src="./Right_Answer.png"
@@ -552,7 +556,7 @@ function Status({
                       border={"2px solid black"}
                     >
                       <Center width={"full"} height={"full"}>
-                        {userData.dataLogin?.scoreData?.Value?.[2] === 10 ? (
+                        {scoreLevel2?.[2] === 10 ? (
                           <Image
                             boxSize={"40px"}
                             src="./Right_Answer.png"
@@ -582,7 +586,7 @@ function Status({
                       border={"2px solid black"}
                     >
                       <Center width={"full"} height={"full"}>
-                        {userData.dataLogin?.scoreData?.Value?.[5] === 10 ? (
+                        {scoreLevel2?.[5] === 10 ? (
                           <Image
                             boxSize={"40px"}
                             src="./Right_Answer.png"
@@ -612,7 +616,7 @@ function Status({
                       border={"2px solid black"}
                     >
                       <Center width={"full"} height={"full"}>
-                        {userData.dataLogin?.scoreData?.Value?.[8] === 10 ? (
+                        {scoreLevel2?.[8] === 10 ? (
                           <Image
                             boxSize={"40px"}
                             src="./Right_Answer.png"

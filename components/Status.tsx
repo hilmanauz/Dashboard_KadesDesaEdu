@@ -63,7 +63,10 @@ function Status({
   const scoreLevel2 = userData.dataLogin?.scoreData?.Value?.replace(
     /\[|\]/g,
     ""
-  ).split(",");
+  )
+    .split(",")
+    .map((score: string) => parseInt(score));
+
   return (
     <GridItem
       colSpan={3}
@@ -300,358 +303,278 @@ function Status({
                       {userData.dataLogin?.score?.Value}
                     </Heading>
                   </Center>
-                  <Grid
-                    h={"20vh"}
-                    width={"75%"}
-                    templateRows="repeat(3, 1fr)"
-                    templateColumns="repeat(8, 1fr)"
-                    borderRadius={"12px"}
-                    border={"3px solid black"}
-                    backgroundColor={"white"}
-                    gap={0}
-                  >
-                    <GridItem
-                      rowSpan={1}
-                      colSpan={1}
-                      border={"2px solid black"}
-                      borderRadius={"8px 0px 0px 0px"}
-                    >
-                      <Center width={"full"} height={"full"}>
-                        <Heading fontSize={"23px"}>1</Heading>
-                      </Center>
-                    </GridItem>
-                    <GridItem
-                      rowSpan={1}
-                      colSpan={1}
-                      border={"2px solid black"}
-                    >
-                      <Center width={"full"} height={"full"}>
-                        {scoreLevel2?.[0] === 10 ? (
-                          <Image
-                            boxSize={"40px"}
-                            src="./Right_Answer.png"
-                            alt="Dan Abramov"
-                          />
-                        ) : (
-                          <Image
-                            boxSize={"40px"}
-                            src="./Wrong_Answer.png"
-                            alt="Dan Abramov"
-                          />
-                        )}
-                      </Center>
-                    </GridItem>
-                    <GridItem
-                      rowSpan={1}
-                      colSpan={1}
-                      border={"2px solid black"}
-                    >
-                      <Center width={"full"} height={"full"}>
-                        <Heading fontSize={"23px"}>4</Heading>
-                      </Center>
-                    </GridItem>
-                    <GridItem
-                      rowSpan={1}
-                      colSpan={1}
-                      border={"2px solid black"}
-                    >
-                      <Center width={"full"} height={"full"}>
-                        {scoreLevel2?.[3] === 10 ? (
-                          <Image
-                            boxSize={"40px"}
-                            src="./Right_Answer.png"
-                            alt="Dan Abramov"
-                          />
-                        ) : (
-                          <Image
-                            boxSize={"40px"}
-                            src="./Wrong_Answer.png"
-                            alt="Dan Abramov"
-                          />
-                        )}
-                      </Center>
-                    </GridItem>
-                    <GridItem
-                      rowSpan={1}
-                      colSpan={1}
-                      border={"2px solid black"}
-                    >
-                      <Center width={"full"} height={"full"}>
-                        <Heading fontSize={"23px"}>7</Heading>
-                      </Center>
-                    </GridItem>
-                    <GridItem
-                      rowSpan={1}
-                      colSpan={1}
-                      border={"2px solid black"}
-                    >
-                      <Center width={"full"} height={"full"}>
-                        {scoreLevel2?.[6] === 10 ? (
-                          <Image
-                            boxSize={"40px"}
-                            src="./Right_Answer.png"
-                            alt="Dan Abramov"
-                          />
-                        ) : (
-                          <Image
-                            boxSize={"40px"}
-                            src="./Wrong_Answer.png"
-                            alt="Dan Abramov"
-                          />
-                        )}
-                      </Center>
-                    </GridItem>
-                    <GridItem
-                      rowSpan={1}
-                      colSpan={1}
-                      border={"2px solid black"}
-                    >
-                      <Center width={"full"} height={"full"}>
-                        <Heading fontSize={"23px"}>10</Heading>
-                      </Center>
-                    </GridItem>
-                    <GridItem
-                      rowSpan={1}
-                      colSpan={1}
-                      border={"2px solid black"}
-                      borderRadius={"0px 8px 0px 0px"}
-                    >
-                      <Center width={"full"} height={"full"}>
-                        {scoreLevel2?.[9] === 10 ? (
-                          <Image
-                            boxSize={"40px"}
-                            src="./Right_Answer.png"
-                            alt="Dan Abramov"
-                          />
-                        ) : (
-                          <Image
-                            boxSize={"40px"}
-                            src="./Wrong_Answer.png"
-                            alt="Dan Abramov"
-                          />
-                        )}
-                      </Center>
-                    </GridItem>
-                    <GridItem
-                      rowSpan={1}
-                      colSpan={1}
-                      border={"2px solid black"}
-                    >
-                      <Center width={"full"} height={"full"}>
-                        <Heading fontSize={"23px"}>2</Heading>
-                      </Center>
-                    </GridItem>
-                    <GridItem
-                      rowSpan={1}
-                      colSpan={1}
-                      border={"2px solid black"}
-                    >
-                      <Center width={"full"} height={"full"}>
-                        {scoreLevel2?.[1] === 10 ? (
-                          <Image
-                            boxSize={"40px"}
-                            src="./Right_Answer.png"
-                            alt="Dan Abramov"
-                          />
-                        ) : (
-                          <Image
-                            boxSize={"40px"}
-                            src="./Wrong_Answer.png"
-                            alt="Dan Abramov"
-                          />
-                        )}
-                      </Center>
-                    </GridItem>
-                    <GridItem
-                      rowSpan={1}
-                      colSpan={1}
-                      border={"2px solid black"}
-                    >
-                      <Center width={"full"} height={"full"}>
-                        <Heading fontSize={"23px"}>5</Heading>
-                      </Center>
-                    </GridItem>
-                    <GridItem
-                      rowSpan={1}
-                      colSpan={1}
-                      border={"2px solid black"}
-                    >
-                      <Center width={"full"} height={"full"}>
-                        {scoreLevel2?.[4] === 10 ? (
-                          <Image
-                            boxSize={"40px"}
-                            src="./Right_Answer.png"
-                            alt="Dan Abramov"
-                          />
-                        ) : (
-                          <Image
-                            boxSize={"40px"}
-                            src="./Wrong_Answer.png"
-                            alt="Dan Abramov"
-                          />
-                        )}
-                      </Center>
-                    </GridItem>
-                    <GridItem
-                      rowSpan={1}
-                      colSpan={1}
-                      border={"2px solid black"}
-                    >
-                      <Center width={"full"} height={"full"}>
-                        <Heading fontSize={"23px"}>8</Heading>
-                      </Center>
-                    </GridItem>
-                    <GridItem
-                      rowSpan={1}
-                      colSpan={1}
-                      border={"2px solid black"}
-                    >
-                      <Center width={"full"} height={"full"}>
-                        {scoreLevel2?.[7] === 10 ? (
-                          <Image
-                            boxSize={"40px"}
-                            src="./Right_Answer.png"
-                            alt="Dan Abramov"
-                          />
-                        ) : (
-                          <Image
-                            boxSize={"40px"}
-                            src="./Wrong_Answer.png"
-                            alt="Dan Abramov"
-                          />
-                        )}
-                      </Center>
-                    </GridItem>
-                    <GridItem
-                      rowSpan={1}
-                      colSpan={1}
-                      border={"2px solid black"}
-                    >
-                      <Center width={"full"} height={"full"}>
-                        <Heading fontSize={"23px"}></Heading>
-                      </Center>
-                    </GridItem>
-                    <GridItem
-                      rowSpan={1}
-                      colSpan={1}
-                      border={"2px solid black"}
-                    >
-                      <Center width={"full"} height={"full"}>
-                        <Heading fontSize={"23px"}></Heading>
-                      </Center>
-                    </GridItem>
-                    <GridItem
-                      rowSpan={1}
-                      colSpan={1}
-                      border={"2px solid black"}
-                      borderRadius={"0px 0px 0px 8px"}
-                    >
-                      <Center width={"full"} height={"full"}>
-                        <Heading fontSize={"23px"}>3</Heading>
-                      </Center>
-                    </GridItem>
-                    <GridItem
-                      rowSpan={1}
-                      colSpan={1}
-                      border={"2px solid black"}
-                    >
-                      <Center width={"full"} height={"full"}>
-                        {scoreLevel2?.[2] === 10 ? (
-                          <Image
-                            boxSize={"40px"}
-                            src="./Right_Answer.png"
-                            alt="Dan Abramov"
-                          />
-                        ) : (
-                          <Image
-                            boxSize={"40px"}
-                            src="./Wrong_Answer.png"
-                            alt="Dan Abramov"
-                          />
-                        )}
-                      </Center>
-                    </GridItem>
-                    <GridItem
-                      rowSpan={1}
-                      colSpan={1}
-                      border={"2px solid black"}
-                    >
-                      <Center width={"full"} height={"full"}>
-                        <Heading fontSize={"23px"}>6</Heading>
-                      </Center>
-                    </GridItem>
-                    <GridItem
-                      rowSpan={1}
-                      colSpan={1}
-                      border={"2px solid black"}
-                    >
-                      <Center width={"full"} height={"full"}>
-                        {scoreLevel2?.[5] === 10 ? (
-                          <Image
-                            boxSize={"40px"}
-                            src="./Right_Answer.png"
-                            alt="Dan Abramov"
-                          />
-                        ) : (
-                          <Image
-                            boxSize={"40px"}
-                            src="./Wrong_Answer.png"
-                            alt="Dan Abramov"
-                          />
-                        )}
-                      </Center>
-                    </GridItem>
-                    <GridItem
-                      rowSpan={1}
-                      colSpan={1}
-                      border={"2px solid black"}
-                    >
-                      <Center width={"full"} height={"full"}>
-                        <Heading fontSize={"23px"}>9</Heading>
-                      </Center>
-                    </GridItem>
-                    <GridItem
-                      rowSpan={1}
-                      colSpan={1}
-                      border={"2px solid black"}
-                    >
-                      <Center width={"full"} height={"full"}>
-                        {scoreLevel2?.[8] === 10 ? (
-                          <Image
-                            boxSize={"40px"}
-                            src="./Right_Answer.png"
-                            alt="Dan Abramov"
-                          />
-                        ) : (
-                          <Image
-                            boxSize={"40px"}
-                            src="./Wrong_Answer.png"
-                            alt="Dan Abramov"
-                          />
-                        )}
-                      </Center>
-                    </GridItem>
-                    <GridItem
-                      rowSpan={1}
-                      colSpan={1}
-                      border={"2px solid black"}
-                    >
-                      <Center width={"full"} height={"full"}>
-                        <Heading fontSize={"23px"}></Heading>
-                      </Center>
-                    </GridItem>
-                    <GridItem
-                      rowSpan={1}
-                      colSpan={1}
-                      border={"2px solid black"}
-                      borderRadius={"0px 0px 8px 0px"}
-                    >
-                      <Center width={"full"} height={"full"}>
-                        <Heading fontSize={"23px"}></Heading>
-                      </Center>
-                    </GridItem>
-                  </Grid>
                 </HStack>
+                <Grid
+                  h={"20vh"}
+                  width={"75%"}
+                  templateRows="repeat(3, 1fr)"
+                  templateColumns="repeat(8, 1fr)"
+                  borderRadius={"12px"}
+                  border={"3px solid black"}
+                  backgroundColor={"white"}
+                  gap={0}
+                >
+                  <GridItem
+                    rowSpan={1}
+                    colSpan={1}
+                    border={"2px solid black"}
+                    borderRadius={"8px 0px 0px 0px"}
+                  >
+                    <Center width={"full"} height={"full"}>
+                      <Heading fontSize={"23px"}>1</Heading>
+                    </Center>
+                  </GridItem>
+                  <GridItem rowSpan={1} colSpan={1} border={"2px solid black"}>
+                    <Center width={"full"} height={"full"}>
+                      {scoreLevel2?.[0] === 10 ? (
+                        <Image
+                          boxSize={"40px"}
+                          src="./Right_Answer.png"
+                          alt="Dan Abramov"
+                        />
+                      ) : (
+                        <Image
+                          boxSize={"40px"}
+                          src="./Wrong_Answer.png"
+                          alt="Dan Abramov"
+                        />
+                      )}
+                    </Center>
+                  </GridItem>
+                  <GridItem rowSpan={1} colSpan={1} border={"2px solid black"}>
+                    <Center width={"full"} height={"full"}>
+                      <Heading fontSize={"23px"}>4</Heading>
+                    </Center>
+                  </GridItem>
+                  <GridItem rowSpan={1} colSpan={1} border={"2px solid black"}>
+                    <Center width={"full"} height={"full"}>
+                      {scoreLevel2?.[3] === 10 ? (
+                        <Image
+                          boxSize={"40px"}
+                          src="./Right_Answer.png"
+                          alt="Dan Abramov"
+                        />
+                      ) : (
+                        <Image
+                          boxSize={"40px"}
+                          src="./Wrong_Answer.png"
+                          alt="Dan Abramov"
+                        />
+                      )}
+                    </Center>
+                  </GridItem>
+                  <GridItem rowSpan={1} colSpan={1} border={"2px solid black"}>
+                    <Center width={"full"} height={"full"}>
+                      <Heading fontSize={"23px"}>7</Heading>
+                    </Center>
+                  </GridItem>
+                  <GridItem rowSpan={1} colSpan={1} border={"2px solid black"}>
+                    <Center width={"full"} height={"full"}>
+                      {scoreLevel2?.[6] === 10 ? (
+                        <Image
+                          boxSize={"40px"}
+                          src="./Right_Answer.png"
+                          alt="Dan Abramov"
+                        />
+                      ) : (
+                        <Image
+                          boxSize={"40px"}
+                          src="./Wrong_Answer.png"
+                          alt="Dan Abramov"
+                        />
+                      )}
+                    </Center>
+                  </GridItem>
+                  <GridItem rowSpan={1} colSpan={1} border={"2px solid black"}>
+                    <Center width={"full"} height={"full"}>
+                      <Heading fontSize={"23px"}>10</Heading>
+                    </Center>
+                  </GridItem>
+                  <GridItem
+                    rowSpan={1}
+                    colSpan={1}
+                    border={"2px solid black"}
+                    borderRadius={"0px 8px 0px 0px"}
+                  >
+                    <Center width={"full"} height={"full"}>
+                      {scoreLevel2?.[9] === 10 ? (
+                        <Image
+                          boxSize={"40px"}
+                          src="./Right_Answer.png"
+                          alt="Dan Abramov"
+                        />
+                      ) : (
+                        <Image
+                          boxSize={"40px"}
+                          src="./Wrong_Answer.png"
+                          alt="Dan Abramov"
+                        />
+                      )}
+                    </Center>
+                  </GridItem>
+                  <GridItem rowSpan={1} colSpan={1} border={"2px solid black"}>
+                    <Center width={"full"} height={"full"}>
+                      <Heading fontSize={"23px"}>2</Heading>
+                    </Center>
+                  </GridItem>
+                  <GridItem rowSpan={1} colSpan={1} border={"2px solid black"}>
+                    <Center width={"full"} height={"full"}>
+                      {scoreLevel2?.[1] === 10 ? (
+                        <Image
+                          boxSize={"40px"}
+                          src="./Right_Answer.png"
+                          alt="Dan Abramov"
+                        />
+                      ) : (
+                        <Image
+                          boxSize={"40px"}
+                          src="./Wrong_Answer.png"
+                          alt="Dan Abramov"
+                        />
+                      )}
+                    </Center>
+                  </GridItem>
+                  <GridItem rowSpan={1} colSpan={1} border={"2px solid black"}>
+                    <Center width={"full"} height={"full"}>
+                      <Heading fontSize={"23px"}>5</Heading>
+                    </Center>
+                  </GridItem>
+                  <GridItem rowSpan={1} colSpan={1} border={"2px solid black"}>
+                    <Center width={"full"} height={"full"}>
+                      {scoreLevel2?.[4] === 10 ? (
+                        <Image
+                          boxSize={"40px"}
+                          src="./Right_Answer.png"
+                          alt="Dan Abramov"
+                        />
+                      ) : (
+                        <Image
+                          boxSize={"40px"}
+                          src="./Wrong_Answer.png"
+                          alt="Dan Abramov"
+                        />
+                      )}
+                    </Center>
+                  </GridItem>
+                  <GridItem rowSpan={1} colSpan={1} border={"2px solid black"}>
+                    <Center width={"full"} height={"full"}>
+                      <Heading fontSize={"23px"}>8</Heading>
+                    </Center>
+                  </GridItem>
+                  <GridItem rowSpan={1} colSpan={1} border={"2px solid black"}>
+                    <Center width={"full"} height={"full"}>
+                      {scoreLevel2?.[7] === 10 ? (
+                        <Image
+                          boxSize={"40px"}
+                          src="./Right_Answer.png"
+                          alt="Dan Abramov"
+                        />
+                      ) : (
+                        <Image
+                          boxSize={"40px"}
+                          src="./Wrong_Answer.png"
+                          alt="Dan Abramov"
+                        />
+                      )}
+                    </Center>
+                  </GridItem>
+                  <GridItem rowSpan={1} colSpan={1} border={"2px solid black"}>
+                    <Center width={"full"} height={"full"}>
+                      <Heading fontSize={"23px"}></Heading>
+                    </Center>
+                  </GridItem>
+                  <GridItem rowSpan={1} colSpan={1} border={"2px solid black"}>
+                    <Center width={"full"} height={"full"}>
+                      <Heading fontSize={"23px"}></Heading>
+                    </Center>
+                  </GridItem>
+                  <GridItem
+                    rowSpan={1}
+                    colSpan={1}
+                    border={"2px solid black"}
+                    borderRadius={"0px 0px 0px 8px"}
+                  >
+                    <Center width={"full"} height={"full"}>
+                      <Heading fontSize={"23px"}>3</Heading>
+                    </Center>
+                  </GridItem>
+                  <GridItem rowSpan={1} colSpan={1} border={"2px solid black"}>
+                    <Center width={"full"} height={"full"}>
+                      {scoreLevel2?.[2] === 10 ? (
+                        <Image
+                          boxSize={"40px"}
+                          src="./Right_Answer.png"
+                          alt="Dan Abramov"
+                        />
+                      ) : (
+                        <Image
+                          boxSize={"40px"}
+                          src="./Wrong_Answer.png"
+                          alt="Dan Abramov"
+                        />
+                      )}
+                    </Center>
+                  </GridItem>
+                  <GridItem rowSpan={1} colSpan={1} border={"2px solid black"}>
+                    <Center width={"full"} height={"full"}>
+                      <Heading fontSize={"23px"}>6</Heading>
+                    </Center>
+                  </GridItem>
+                  <GridItem rowSpan={1} colSpan={1} border={"2px solid black"}>
+                    <Center width={"full"} height={"full"}>
+                      {scoreLevel2?.[5] === 10 ? (
+                        <Image
+                          boxSize={"40px"}
+                          src="./Right_Answer.png"
+                          alt="Dan Abramov"
+                        />
+                      ) : (
+                        <Image
+                          boxSize={"40px"}
+                          src="./Wrong_Answer.png"
+                          alt="Dan Abramov"
+                        />
+                      )}
+                    </Center>
+                  </GridItem>
+                  <GridItem rowSpan={1} colSpan={1} border={"2px solid black"}>
+                    <Center width={"full"} height={"full"}>
+                      <Heading fontSize={"23px"}>9</Heading>
+                    </Center>
+                  </GridItem>
+                  <GridItem rowSpan={1} colSpan={1} border={"2px solid black"}>
+                    <Center width={"full"} height={"full"}>
+                      {scoreLevel2?.[8] === 10 ? (
+                        <Image
+                          boxSize={"40px"}
+                          src="./Right_Answer.png"
+                          alt="Dan Abramov"
+                        />
+                      ) : (
+                        <Image
+                          boxSize={"40px"}
+                          src="./Wrong_Answer.png"
+                          alt="Dan Abramov"
+                        />
+                      )}
+                    </Center>
+                  </GridItem>
+                  <GridItem rowSpan={1} colSpan={1} border={"2px solid black"}>
+                    <Center width={"full"} height={"full"}>
+                      <Heading fontSize={"23px"}></Heading>
+                    </Center>
+                  </GridItem>
+                  <GridItem
+                    rowSpan={1}
+                    colSpan={1}
+                    border={"2px solid black"}
+                    borderRadius={"0px 0px 8px 0px"}
+                  >
+                    <Center width={"full"} height={"full"}>
+                      <Heading fontSize={"23px"}></Heading>
+                    </Center>
+                  </GridItem>
+                </Grid>
               </HStack>
             )}
           </VStack>

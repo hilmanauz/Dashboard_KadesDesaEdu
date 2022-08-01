@@ -89,7 +89,7 @@ function Form() {
           SessionTicket || ""
         );
         toast({
-          title: "Your account has been created successfully",
+          title: "Your information data has been updated successfully",
           status: "success",
           duration: 2000,
         });

@@ -28,8 +28,14 @@ const Home = (
   React.useEffect(() => {
     if ((validateToken.data?.data?.error && !EntityToken) || !props.dataLogin)
       Router.push("/login");
-    if (!props.dataLogin?.profile) Router.push("/registers/form");
-  }, [validateToken, EntityToken, props.accountInfo, props.dataLogin]);
+    else if (!props.dataLogin?.profile) Router.push("/registers/form");
+  }, [
+    validateToken,
+    EntityToken,
+    props.accountInfo,
+    props.dataLogin,
+    props.error,
+  ]);
 
   if (!props.dataLogin?.profile) return <></>;
 
@@ -59,6 +65,7 @@ const Home = (
 export const getServerSideProps: GetServerSideProps<{
   dataLogin: any;
   accountInfo: any;
+  error: any;
 }> = async (context) => {
   try {
     const SessionTicket = getCookie("SessionTicket", context) || "";

@@ -12,10 +12,11 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { LoginForm } from ".";
+import { LoginForm } from "./dashboard";
 import Router from "next/router";
 import useClient from "../engines/useClient";
 import { deleteCookie, setCookie } from "cookies-next";
+import Link from "next/link";
 
 function Login() {
   const formRef = useForm<LoginForm>({
@@ -81,7 +82,14 @@ function Login() {
         backgroundPosition={"center"}
         backgroundSize={"cover"}
       >
-        <Image src="./Front_logo.png" alt="Dan Abramov" width={"full"} />
+        <Link href={"/"}>
+          <Image
+            src="./Logo.png"
+            alt="Dan Abramov"
+            width={"full"}
+            cursor={"pointer"}
+          />
+        </Link>
       </Box>
       <br />
       <br />

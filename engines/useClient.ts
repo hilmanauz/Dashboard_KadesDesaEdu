@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import useSWR from "swr";
 import Cookies from 'js-cookie';
-import { LoginForm } from "../pages";
+import { LoginForm } from "../pages/dashboard";
 import { RegisterForm } from "../pages/registers/account";
 import { getCookie } from "cookies-next";
 

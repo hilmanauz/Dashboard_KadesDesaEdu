@@ -4,10 +4,11 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { extendTheme } from "@chakra-ui/react";
 
 const breakpoints = {
-  sm: "34em",
-  md: "60em",
-  lg: "76.8em",
-  xl: "144em",
+  sm: "320px",
+  md: "768px",
+  lg: "960px",
+  xl: "1200px",
+  "2xl": "1536px",
 };
 
 const theme = extendTheme({
@@ -25,11 +26,37 @@ const theme = extendTheme({
     Heading: {
       baseStyle: {
         fontFamily: "MatSaleh",
+        letterSpacing: "0.5px",
         fontWeight: "500",
       },
       sizes: {
         lg: {
-          letterSpacing: "0.5px",
+          fontSize: "40px",
+        },
+        md: {
+          fontSize: "30px",
+        },
+        sm: {
+          fontSize: "25px",
+        },
+        xs: {
+          fontSize: "20px",
+        },
+      },
+      defaultProps: {
+        size: "lg",
+      },
+    },
+    Text: {
+      sizes: {
+        lg: {
+          fontSize: "24px",
+        },
+        md: {
+          fontSize: "20px",
+        },
+        sm: {
+          fontSize: "14px",
         },
       },
       defaultProps: {

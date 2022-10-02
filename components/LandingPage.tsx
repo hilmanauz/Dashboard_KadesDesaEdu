@@ -16,6 +16,7 @@ import {
   GridItem,
   useDisclosure,
   Button,
+  Stack,
 } from "@chakra-ui/react";
 import React from "react";
 import Scrollbars from "rc-scrollbars";
@@ -25,6 +26,12 @@ import Router from "next/router";
 import { deleteCookie, getCookie } from "cookies-next";
 import useClient from "../engines/useClient";
 import Link from "next/link";
+
+const size = { lg: "lg", md: "md", sm: "sm" };
+
+const imageSize = { lg: "220px", md: "170px", sm: "120px" };
+
+const paddingContainer = { lg: "200px", md: "150px", sm: "100px" };
 
 function LandingPage() {
   const client = useClient();
@@ -41,6 +48,7 @@ function LandingPage() {
     deleteCookie("EntityToken");
     deleteCookie("PlayFabId");
   }, []);
+
   return (
     <AutoSizer>
       {({ height, width }) => (
@@ -54,16 +62,20 @@ function LandingPage() {
                 backgroundPosition={"center"}
                 position={"relative"}
                 backgroundImage={"./Background_Title.png"}
-                paddingRight={"100px"}
+                paddingRight={{ lg: "100px", md: "60px", sm: "50px" }}
               >
                 {!isLogin ? (
-                  <Box position={"absolute"} top={"30px"} right={"100px"}>
+                  <Box
+                    position={"absolute"}
+                    top={"30px"}
+                    right={{ lg: "100px", md: "60px", sm: "50px" }}
+                  >
                     <Link href={"/login"}>
                       <Button
-                        width={"200px"}
-                        height={"80px"}
+                        width={{ sm: "150px", md: "200px", lg: "230px" }}
+                        height={{ sm: "50px", md: "70px" }}
                         variant={"unstyled"}
-                        borderRadius={"24px"}
+                        borderRadius={{ lg: "24px", md: "18px", sm: "15px" }}
                         border={"8px solid white"}
                         outline={"5px solid black"}
                         outlineOffset={"-9px"}
@@ -78,7 +90,7 @@ function LandingPage() {
                           background:
                             "radial-gradient(300px 65px at bottom center, rgba(249,175,26,1) 80%, rgba(251,199,95,1) 90%, rgba(251,199,95,1) 100%)",
                         }}
-                        fontSize={"3xl"}
+                        fontSize={{ lg: "3xl", md: "2xl", sm: "xl" }}
                         color={"white"}
                         display={"flex"}
                       >
@@ -89,10 +101,10 @@ function LandingPage() {
                 ) : (
                   <Box position={"absolute"} top={"30px"} right={"100px"}>
                     <Button
-                      width={"200px"}
-                      height={"80px"}
+                      width={{ sm: "150px", md: "200px", lg: "230px" }}
+                      height={{ sm: "50px", md: "70px" }}
                       variant={"unstyled"}
-                      borderRadius={"24px"}
+                      borderRadius={{ lg: "24px", md: "18px", sm: "15px" }}
                       border={"8px solid white"}
                       outline={"5px solid black"}
                       onClick={handleSignOut}
@@ -122,7 +134,7 @@ function LandingPage() {
                   {isLogin && (
                     <VStack marginTop={"50px"} spacing={"30px"}>
                       <Button
-                        width={"55%"}
+                        width={{ lg: "55%", md: "100%", sm: "100%" }}
                         bgColor={"#BE9770"}
                         paddingX={"80px"}
                         paddingY={"30px"}
@@ -159,18 +171,18 @@ function LandingPage() {
                             alt="Desktop_Icon"
                             width={"2.2vw"}
                           />
-                          <Heading
+                          <Text
                             marginY={"auto !important"}
                             height={"full"}
                             lineHeight={"0"}
-                            fontSize={{ lg: "1.5vw" }}
+                            size={size}
                           >
                             Link From Desktop
-                          </Heading>
+                          </Text>
                         </HStack>
                       </Button>
                       <Button
-                        width={"55%"}
+                        width={{ lg: "55%", md: "100%", sm: "100%" }}
                         bgColor={"#BE9770"}
                         paddingX={"80px"}
                         paddingY={"30px"}
@@ -205,20 +217,20 @@ function LandingPage() {
                           <Image
                             src="./Mobile_Icon.png"
                             alt="Mobile_Icon"
-                            width={"1.8vw"}
+                            width={{ lg: "1.8vw", md: "2vw" }}
                           />
-                          <Heading
+                          <Text
                             marginY={"auto !important"}
                             height={"full"}
                             lineHeight={"0"}
-                            fontSize={{ lg: "1.5vw" }}
+                            size={size}
                           >
                             Link From Mobile
-                          </Heading>
+                          </Text>
                         </HStack>
                       </Button>
                       <Button
-                        width={"55%"}
+                        width={{ lg: "55%", md: "100%", sm: "100%" }}
                         bgColor={"#BE9770"}
                         paddingX={"80px"}
                         paddingY={"30px"}
@@ -249,16 +261,16 @@ function LandingPage() {
                           <Image
                             src="./Dashboard_Icon.png"
                             alt="Dashboard_Icon"
-                            width={"1.8vw"}
+                            width={{ lg: "1.8vw", md: "2vw" }}
                           />
-                          <Heading
+                          <Text
                             marginY={"auto !important"}
                             height={"full"}
                             lineHeight={"0"}
-                            fontSize={{ lg: "1.5vw" }}
+                            size={size}
                           >
                             Link From Dashboard
-                          </Heading>
+                          </Text>
                         </HStack>
                       </Button>
                     </VStack>
@@ -266,19 +278,39 @@ function LandingPage() {
                 </Box>
               </HStack>
               <Box
-                fontSize={"30px"}
                 backgroundImage={"./Background_kertas.png"}
                 backgroundSize={"cover"}
                 backgroundRepeat={"no-repeat"}
                 backgroundPosition={"center"}
                 position={"relative"}
                 width={"full"}
-                paddingY={"200px"}
+                paddingY={paddingContainer}
                 textAlign={"center"}
               >
-                <Container maxW="80vw">
-                  <VStack spacing={"15vh"} letterSpacing={"1px"}>
-                    <Box
+                <Container maxW={{ md: "2xl", lg: "80vw" }}>
+                  <VStack gap={{ sm: 16, lg: 36 }} letterSpacing={"1px"}>
+                    <Center
+                      width={"full"}
+                      height={{ lg: "80vh", md: "45vh", sm: "40vh" }}
+                      borderRadius={"30px"}
+                      bgColor={"#f9f3ea"}
+                      boxShadow={
+                        "0 20px 0 0 rgb(0 0 0 / 15%), 0 0 20px 0 rgb(0 0 0 / 14%)"
+                      }
+                      position={"relative"}
+                    >
+                      <iframe
+                        style={{
+                          height: "90%",
+                          width: "95%",
+                          position: "absolute",
+                        }}
+                        allow="autoplay; encrypted-media"
+                        src={`https://www.youtube.com/embed/sD_Z5Go175c?controls=0&rel=0`}
+                        allowFullScreen
+                      />
+                    </Center>
+                    {/* <Box
                       width={"full"}
                       height={"80vh"}
                       borderRadius={"30px"}
@@ -287,167 +319,223 @@ function LandingPage() {
                       boxShadow={
                         "28px 28px 0 0 rgb(0 0 0 / 15%), 0 0 100px 0 rgb(0 0 0 / 14%)"
                       }
-                    ></Box>
-                    <Box
-                      width={"full"}
-                      alignSelf={"center"}
-                      flexDirection={"column"}
+                    ></Box> */}
+                    <HStack gap={6} justifyContent={"space-between"}>
+                      <VStack
+                        alignItems={"normal"}
+                        flex={1}
+                        textAlign={"justify"}
+                      >
+                        <Box
+                          borderBottom={"5px solid black"}
+                          width={"min-content"}
+                          paddingBottom={{ lg: "10px", sm: "0px" }}
+                          marginBottom={{ sm: "20px", lg: "40px" }}
+                        >
+                          <Heading size={size}>ABOUT</Heading>
+                        </Box>
+                        <Text size={size}>
+                          The first DISC assessment game and sensing perception
+                          gap training in Indonesia.
+                        </Text>
+                        <Text size={size}>
+                          Who are you adalah permainan yang menggabungkan alat
+                          penilaian serta penginderaan dan pelaksanaan
+                          pelatihan. Who Are You akan menjadi pelatihan
+                          kepemimpinan praktis bagi pemain yang menggabungkan
+                          konsep kepekaan antarbudaya untuk menjembatani
+                          pengetahuan dengan melatih soft-skill.
+                        </Text>
+                      </VStack>
+                      <Box
+                        width={{ lg: "220px", md: "170px", sm: "120px" }}
+                        display={{ sm: "none", md: "flex" }}
+                      >
+                        <Image src="PakKades.png" alt={"PakKades"} />
+                      </Box>
+                    </HStack>
+                    <VStack
+                      gap={{ sm: "20px", lg: "50px" }}
+                      alignItems={"normal"}
                     >
                       <Box
                         borderBottom={"5px solid black"}
                         width={"min-content"}
-                        paddingBottom={"10px"}
+                        paddingBottom={{ lg: "10px", sm: "0px" }}
                       >
-                        <Heading fontSize={{ lg: "2.7vw" }} size={"lg"}>
-                          ABOUT
-                        </Heading>
-                      </Box>
-                      <HStack gap={"5vw"} justifyContent={"space-between"}>
-                        <VStack
-                          textAlign={"justify"}
-                          alignItems={"normal"}
-                          width={"55vw"}
-                          fontSize={{ lg: "1.7vw" }}
-                        >
-                          <Text>
-                            The first DISC assessment game and sensing
-                            perception gap training in Indonesia
-                          </Text>
-                          <Text>
-                            Who are you adalah permainan yang menggabungkan alat
-                            penilaian serta penginderaan dan pelaksanaan
-                            pelatihan. Who Are You akan menjadi pelatihan
-                            kepemimpinan praktis bagi pemain yang menggabungkan
-                            konsep kepekaan antarbudaya untuk menjembatani
-                            pengetahuan dengan melatih soft-skill.
-                          </Text>
-                        </VStack>
-                        <Box width={"15vw"}>
-                          <Image src="PakKades.png" alt={"PakKades"} />
-                        </Box>
-                      </HStack>
-                    </Box>
-                    <VStack gap={"50px"} alignItems={"normal"}>
-                      <Box
-                        borderBottom={"5px solid black"}
-                        width={"min-content"}
-                        paddingBottom={"10px"}
-                      >
-                        <Heading fontSize={{ lg: "2.7vw" }} size={"lg"}>
-                          DISC
-                        </Heading>
+                        <Heading size={size}>DISC</Heading>
                       </Box>
                       <Grid
-                        templateColumns="repeat(2, minmax(0px, 1fr))"
-                        gap={16}
+                        templateColumns={{
+                          sm: "repeat(1, minmax(0px, 1fr))",
+                          lg: "repeat(2, minmax(0px, 1fr))",
+                        }}
+                        gap={{ sm: 6, md: 10, lg: 16 }}
                         letterSpacing={"0.5px"}
                         textAlign={"justify"}
                         fontSize={{ lg: "1.7vw" }}
                       >
                         <GridItem colSpan={1}>
                           <HStack gap={6}>
-                            <Center height={"full"} width={"28%"}>
+                            <Center height={"full"} width={imageSize}>
                               <Image src="./D.png" alt="D" />
                             </Center>
-                            <VStack alignItems={"normal"} width={"72%"}>
-                              <Text>
-                                Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit, sed do eiusmod tempor
-                                incididunt ut
+                            <VStack alignItems={"normal"} flex={1}>
+                              <Text size={size} fontWeight={"extrabold"}>
+                                [D]ominance
+                              </Text>
+                              <Text size={size}>
+                                Orang-orang dengan kepribadian Dominance
+                                memiliki kecenderungan karakter yang dominan,
+                                kuat, dengan ego yang tinggi. Mereka visioner,
+                                mandiri, dan berani mengambil risiko.
                               </Text>
                             </VStack>
                           </HStack>
                         </GridItem>
                         <GridItem colSpan={1}>
                           <HStack gap={6}>
-                            <Center height={"full"} width={"28%"}>
+                            <Center height={"full"} width={imageSize}>
                               <Image src="./I.png" alt="I" />
                             </Center>
-                            <VStack alignItems={"normal"} width={"72%"}>
-                              <Text>
-                                Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit, sed do eiusmod tempor
-                                incididunt ut
+                            <VStack alignItems={"normal"} flex={1}>
+                              <Text size={size} fontWeight={"extrabold"}>
+                                [I]nfluence
+                              </Text>
+                              <Text size={size}>
+                                Karakter DISC ini memiliki pengaruh yang besar
+                                bagi sekitarnya. Kepercayaan dirinya,
+                                antusiasmenya, selera humornya, dan optimismenya
+                                membawa semangat bagi lingkungannya.
                               </Text>
                             </VStack>
                           </HStack>
                         </GridItem>
                         <GridItem colSpan={1}>
                           <HStack gap={6}>
-                            <Center height={"full"} width={"28%"}>
+                            <Center height={"full"} width={imageSize}>
                               <Image src="./S.png" alt="S" />
                             </Center>
-                            <VStack alignItems={"normal"} width={"72%"}>
-                              <Text>
-                                Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit, sed do eiusmod tempor
-                                incididunt ut
+                            <VStack alignItems={"normal"} flex={1}>
+                              <Text size={size} fontWeight={"extrabold"}>
+                                [S]teadiness
+                              </Text>
+                              <Text size={size}>
+                                Konsisten, tenang, dan sabar adalah beberapa
+                                karakter yang menggambarkan kepribadian DISC
+                                yang satu ini.
                               </Text>
                             </VStack>
                           </HStack>
                         </GridItem>
                         <GridItem colSpan={1}>
                           <HStack gap={6}>
-                            <Center height={"full"} width={"28%"}>
+                            <Center height={"full"} width={imageSize}>
                               <Image src="./C.png" alt="C" />
                             </Center>
-                            <VStack alignItems={"normal"} width={"72%"}>
-                              <Text>
-                                Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit, sed do eiusmod tempor
-                                incididunt ut
+                            <VStack alignItems={"normal"} flex={1}>
+                              <Text size={size} fontWeight={"extrabold"}>
+                                [C]ompliance
+                              </Text>
+                              <Text size={size}>
+                                Orang-orang berkarakter Compliance biasanya
+                                tekun, sistematis, teliti, cermat, fokus pada
+                                ketepatan dan kualitas.
                               </Text>
                             </VStack>
                           </HStack>
                         </GridItem>
                       </Grid>
                     </VStack>
-                    <VStack
-                      alignItems={"normal"}
-                      width={"full"}
-                      gap={10}
-                      fontSize={{ lg: "1.7vw" }}
-                    >
+                    <Stack alignItems={"normal"} width={"full"}>
                       <Box
                         borderBottom={"5px solid black"}
                         width={"min-content"}
                         paddingBottom={"10px"}
+                        marginBottom={{ sm: "20px", lg: "40px" }}
                       >
-                        <Heading fontSize={{ lg: "2.7vw" }} size={"lg"}>
-                          Information
-                        </Heading>
+                        <Heading size={size}>Information</Heading>
                       </Box>
                       <Center>
-                        <VStack alignItems={"normal"}>
-                          <Text color={"transparent"}>_</Text>
-                          <Text>CPU:</Text>
-                          <Text>OS:</Text>
-                          <Text>RAM:</Text>
-                          <Text>Resolution:</Text>
-                          <Text>Browser:</Text>
-                          <Text>Network:</Text>
-                        </VStack>
-                        <VStack>
-                          <Heading>Mobile</Heading>
-                          <Text>Qualcomm® Snapdragon™ 662</Text>
-                          <Text>Android 10</Text>
-                          <Text>6 GB</Text>
-                          <Text>1080x2340 {`(${6.53}")`}</Text>
-                          <Text>Updated Browser</Text>
-                          <Text>8 mbps</Text>
-                        </VStack>
-                        <Box width={"50px"}></Box>
-                        <VStack>
-                          <Heading>Desktop</Heading>
-                          <Text>i3</Text>
-                          <Text>Windows, linux, MacOS</Text>
-                          <Text>6 GB</Text>
-                          <Text>1280x1024</Text>
-                          <Text>Updated Browser</Text>
-                          <Text>8 mbps</Text>
+                        <VStack width={"full"}>
+                          <HStack width={"full"}>
+                            <Box width={"30%"} />
+                            <Heading size={{ ...size, sm: "xs" }} width={"35%"}>
+                              Mobile
+                            </Heading>
+                            <Heading size={{ ...size, sm: "xs" }} width={"35%"}>
+                              Desktop
+                            </Heading>
+                          </HStack>
+                          <HStack width={"full"}>
+                            <Text size={size} width={"30%"}>
+                              CPU:
+                            </Text>
+                            <Text size={size} width={"35%"}>
+                              Qualcomm® Snapdragon™ 662
+                            </Text>
+                            <Text size={size} width={"35%"}>
+                              i3
+                            </Text>
+                          </HStack>
+                          <HStack width={"full"}>
+                            <Text size={size} width={"30%"}>
+                              OS:
+                            </Text>
+                            <Text size={size} width={"35%"}>
+                              Android 10
+                            </Text>
+                            <Text size={size} width={"35%"}>
+                              Windows, linux, MacOS
+                            </Text>
+                          </HStack>
+                          <HStack width={"full"}>
+                            <Text size={size} width={"30%"}>
+                              RAM:
+                            </Text>
+                            <Text size={size} width={"35%"}>
+                              6 GB
+                            </Text>
+                            <Text size={size} width={"35%"}>
+                              6 GB
+                            </Text>
+                          </HStack>
+                          <HStack width={"full"}>
+                            <Text size={size} width={"30%"}>
+                              Resolution:
+                            </Text>
+                            <Text size={size} width={"35%"}>
+                              1080x2340 {`(${6.53}")`}
+                            </Text>
+                            <Text size={size} width={"35%"}>
+                              1280x1024
+                            </Text>
+                          </HStack>
+                          <HStack width={"full"}>
+                            <Text size={size} width={"30%"}>
+                              Browser:
+                            </Text>
+                            <Text size={size} width={"35%"}>
+                              Updated Browser
+                            </Text>
+                            <Text size={size} width={"35%"}>
+                              Updated Browser
+                            </Text>
+                          </HStack>
+                          <HStack width={"full"}>
+                            <Text size={size} width={"30%"}>
+                              Network:
+                            </Text>
+                            <Text size={size} width={"35%"}>
+                              8 mbps
+                            </Text>
+                            <Text size={size} width={"35%"}>
+                              8 mbps
+                            </Text>
+                          </HStack>
                         </VStack>
                       </Center>
-                    </VStack>
+                    </Stack>
                   </VStack>
                 </Container>
               </Box>
@@ -458,18 +546,24 @@ function LandingPage() {
                 backgroundImage={"./Background_Everidea.png"}
                 color={"white"}
               >
-                <Center fontSize={{ lg: "1.8vw" }} height={"60vh"}>
-                  <Container maxW="80vw">
-                    <Grid templateColumns="repeat(2, 1fr)" gap={16}>
+                <Center height={"450px"}>
+                  <Container maxW={{ md: "2xl", lg: "80vw" }}>
+                    <Grid
+                      templateColumns={{
+                        sm: "repeat(1, 1fr)",
+                        md: "repeat(2, 1fr)",
+                      }}
+                      gap={16}
+                    >
                       <GridItem w="100%">
                         <VStack alignItems={"normal"} spacing={"30px"}>
                           <VStack alignItems={"inherit"}>
-                            <Heading>Say Hello</Heading>
-                            <Text>Contact@everidea.id</Text>
+                            <Heading size={size}>Say Hello</Heading>
+                            <Text size={size}>Contact@everidea.id</Text>
                           </VStack>
                           <VStack alignItems={"inherit"}>
-                            <Heading>Stop by</Heading>
-                            <Text>
+                            <Heading size={size}>Stop by</Heading>
+                            <Text size={size}>
                               Jalan Karang Tinggal No.31 Bandung, Jawa Barat
                               40162
                             </Text>
@@ -498,9 +592,11 @@ function LandingPage() {
                     </Grid>
                   </Container>
                 </Center>
-                <Heading textAlign={"center"} height={"10vh"}>
-                  &copy; Everidea All Right Reserved
-                </Heading>
+                <Center height={"75px"}>
+                  <Heading fontSize={"20px"} textAlign={"center"}>
+                    &copy; Everidea All Right Reserved
+                  </Heading>
+                </Center>
               </VStack>
             </VStack>
           </Box>

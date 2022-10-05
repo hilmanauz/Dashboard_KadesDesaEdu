@@ -306,7 +306,7 @@ function LandingPage() {
                           position: "absolute",
                         }}
                         allow="autoplay; encrypted-media"
-                        src={`https://www.youtube.com/embed/sD_Z5Go175c?controls=0&rel=0`}
+                        src={`https://www.youtube.com/embed/9k8gnC0X5xM?controls=0&rel=0`}
                         allowFullScreen
                       />
                     </Center>

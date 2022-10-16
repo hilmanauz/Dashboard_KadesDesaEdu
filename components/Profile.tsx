@@ -112,14 +112,16 @@ function Profile({
             >
               {profile?.map((section) => (
                 <HStack key={section.value}>
-                  <Heading fontSize={{ base: "15px", md: "25px", lg: "1.5vw" }}>
+                  <Heading
+                    fontSize={{ base: "15px", md: "3.5vw", lg: "1.5vw" }}
+                  >
                     {section.title}:
                   </Heading>
                   <Text
                     flex={1}
                     fontSize={{
                       base: "12px",
-                      md: "23px",
+                      md: "3vw",
                       lg: "1.25vw",
                     }}
                   >

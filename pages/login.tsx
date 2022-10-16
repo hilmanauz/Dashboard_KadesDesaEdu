@@ -10,6 +10,10 @@ import {
   VStack,
   Image,
   useBreakpointValue,
+  Checkbox,
+  Heading,
+  Link,
+  Spacer,
 } from "@chakra-ui/react";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -17,7 +21,6 @@ import { LoginForm } from "./dashboard";
 import Router from "next/router";
 import useClient from "../engines/useClient";
 import { deleteCookie, setCookie } from "cookies-next";
-import Link from "next/link";
 
 function Login() {
   const formRef = useForm<LoginForm>({
@@ -149,6 +152,16 @@ function Login() {
               size={"lg"}
             />
           </FormControl>
+          <br />
+          <HStack paddingLeft={"20px"}>
+            <Checkbox colorScheme="green" borderColor={"black"} size={"lg"}>
+              <Heading size={"xs"}>Remember me</Heading>
+            </Checkbox>
+            <Spacer />
+            <Link color="green" href="forgot-password">
+              <Heading size={"xs"}>Forgot password?</Heading>
+            </Link>
+          </HStack>
           <br />
           {isMobile && <br />}
           <HStack

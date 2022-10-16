@@ -1,57 +1,49 @@
 import {
-  Box,
-  Button,
   Center,
+  Box,
+  SlideFade,
+  VStack,
   FormControl,
   FormLabel,
-  HStack,
   Input,
+  HStack,
+  FormErrorMessage,
+  Button,
+  Text,
+  useDisclosure,
   useToast,
-  VStack,
-  Image,
-  useBreakpointValue,
+  Heading,
 } from "@chakra-ui/react";
+import { deleteCookie, getCookie } from "cookies-next";
+import Cookies from "js-cookie";
+import _ from "lodash";
+import Router from "next/router";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { LoginForm } from "./dashboard";
-import Router from "next/router";
+import CustomSelect, { SelectOption } from "../components/CustomSelect";
 import useClient from "../engines/useClient";
-import { deleteCookie, setCookie } from "cookies-next";
-import Link from "next/link";
 
-function Login() {
-  const formRef = useForm<LoginForm>({
+function ForgotPassword() {
+  const formRef = useForm({
     defaultValues: {
-      username: "",
-      password: "",
+      email: "",
     },
   });
-
-  const [isLoading, setIsLoading] = React.useState(false);
   const client = useClient();
   const toast = useToast();
-
+  const errors = formRef.formState.errors;
+  const [isLoading, setIsLoading] = React.useState(false);
   const onSubmit = React.useCallback(
-    async (data: LoginForm) => {
+    async (data: { email: string }) => {
       setIsLoading(true);
       try {
-        const dataLogin = await client.login(data);
-        if (dataLogin.data) {
-          const entityToken = await client.getEntityToken();
-          deleteCookie("PlayFabId");
-          deleteCookie("SessionTicket");
-          setCookie("EntityToken", entityToken.data.EntityToken);
-          setCookie("SessionTicket", dataLogin.data.SessionTicket);
-          setCookie("PlayFabId", dataLogin.data.PlayFabId);
-          setCookie("EntityId", dataLogin.data.EntityToken.Entity.Id);
-        }
+        await client.forgot(data.email);
         toast({
-          title: "Login successfull",
+          title:
+            "An account recovery email has been sent to the player's email address.",
           status: "success",
           duration: 2000,
         });
-
-        Router.push("/");
       } catch (error: any) {
         toast.closeAll();
         setIsLoading(false);
@@ -62,95 +54,81 @@ function Login() {
         });
       }
     },
-    [client, toast]
+    [toast, client]
   );
-
-  const handleMoveToRegisterPage = React.useCallback(() => {
-    Router.push("/registers/account");
+  const handleToLogin = React.useCallback(() => {
+    Router.push("/login");
   }, []);
-
-  const isMobile = useBreakpointValue({ sm: true, md: false });
-
   return (
     <Center
-      flexDirection={"column"}
       width={"100vw"}
       height={"100vh"}
       position={"relative"}
-      backgroundImage={"./Background_Login.png"}
+      backgroundImage={"../Background_Login.png"}
     >
       <Box
-        width={{ sm: "100vw", md: "650px" }}
-        backgroundPosition={"center"}
-        backgroundSize={"cover"}
-      >
-        <Link href={"/"}>
-          <Image
-            src="./Logo.png"
-            alt="Dan Abramov"
-            width={"full"}
-            cursor={"pointer"}
-          />
-        </Link>
-      </Box>
-      <br />
-      <br />
-      <Box
+        width={{ sm: "95%", md: "650px" }}
         bg="rgb(233,224,182)"
         borderRadius={"50px"}
         border={"11px solid white"}
         outline={"6px solid black"}
         outlineOffset={"-11px"}
         position={"relative"}
-        padding={{ sm: "25px", md: "50px" }}
+        padding={{ sm: "40px", md: "50px" }}
         backgroundPosition={"center"}
-        backgroundImage={"./Artboard.png"}
+        backgroundImage={"../Artboard.png"}
         backgroundSize={"cover"}
-        width={{ sm: "90vw", md: "600px" }}
       >
         <form onSubmit={formRef.handleSubmit(onSubmit)}>
-          <FormControl
-            display={"flex"}
-            flexDirection={{ sm: "column", md: "row" }}
-          >
-            <FormLabel fontSize={{ sm: "1.5rem", md: "2rem" }}>
-              Username
-            </FormLabel>
-            <Input
-              {...formRef.register("username")}
-              borderColor={"black"}
-              marginX={{ sm: 0, md: "15px" }}
-              fontSize={{ sm: "1.5rem", md: "2rem" }}
-              outline={"5px solid black"}
-              _focus={{ border: "1px solid black" }}
-              _hover={{ border: "1px solid black" }}
-              backgroundColor={"white"}
-              size={"lg"}
-            />
-          </FormControl>
-          <br />
-          <FormControl
-            display={"flex"}
-            flexDirection={{ sm: "column", md: "row" }}
-          >
-            <FormLabel fontSize={{ sm: "1.5rem", md: "2rem" }}>
-              Password
-            </FormLabel>
-            <Input
-              {...formRef.register("password")}
-              type={"password"}
-              borderColor={"black"}
-              marginX={{ sm: 0, md: "15px" }}
-              fontSize={{ sm: "1.5rem", md: "2rem" }}
-              outline={"5px solid black"}
-              _focus={{ border: "1px solid black" }}
-              _hover={{ border: "1px solid black" }}
-              backgroundColor={"white"}
-              size={"lg"}
-            />
-          </FormControl>
-          <br />
-          {isMobile && <br />}
+          <SlideFade in={true} offsetX="20px" offsetY={0}>
+            <VStack alignItems={"normal"} width={"inherit"} spacing={4}>
+              <Heading>Forgot Password</Heading>
+              <Text
+                fontSize={{ md: "16px", sm: "16px" }}
+                letterSpacing={"0.5px"}
+              >
+                Please confirm your email:
+              </Text>
+              <Input
+                flex={1}
+                borderColor={"black"}
+                type={"email"}
+                fontSize={{ md: "25px", sm: "25px" }}
+                outline={"5px solid black"}
+                placeholder={"johndoe@mail.com"}
+                _focus={{ border: "1px solid black" }}
+                _hover={{ border: "1px solid black" }}
+                backgroundColor={"white"}
+                size={"lg"}
+                {...formRef.register("email", {
+                  required: "E-mail is required",
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    message: "invalid email address",
+                  },
+                })}
+              />
+              {errors.email && (
+                <Text
+                  fontSize={"0.875rem"}
+                  marginTop={"0.5rem"}
+                  lineHeight={"normal"}
+                  color={"red"}
+                >
+                  {errors.email.message}
+                </Text>
+              )}
+              <Text
+                fontSize={{ md: "16px", sm: "16px" }}
+                letterSpacing={"0.5px"}
+              >
+                An e-mail with a link to a page where you can reset your
+                password will be sent. Note that the e-mail might take a few
+                minutes to reach your inbox.
+              </Text>
+              <br />
+            </VStack>
+          </SlideFade>
           <HStack
             spacing={{ md: "14", sm: "5" }}
             position={"absolute"}
@@ -162,7 +140,6 @@ function Login() {
           >
             <Button
               width={{ md: "35%", sm: "40%" }}
-              type="submit"
               height={"full"}
               variant={"unstyled"}
               borderRadius={"24px"}
@@ -182,16 +159,18 @@ function Login() {
               }}
               fontSize={{ sm: "xl", md: "3xl" }}
               color={"white"}
-              isLoading={isLoading}
               display={"flex"}
+              onClick={handleToLogin}
             >
-              Login
+              Back
             </Button>
             <Button
               width={{ md: "35%", sm: "40%" }}
+              type="submit"
               height={"full"}
               variant={"unstyled"}
               borderRadius={"24px"}
+              isLoading={isLoading}
               border={"8px solid white"}
               outline={"5px solid black"}
               outlineOffset={"-9px"}
@@ -209,9 +188,8 @@ function Login() {
               fontSize={{ sm: "xl", md: "3xl" }}
               color={"white"}
               display={"flex"}
-              onClick={handleMoveToRegisterPage}
             >
-              Register
+              Send
             </Button>
           </HStack>
         </form>
@@ -220,4 +198,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default ForgotPassword;

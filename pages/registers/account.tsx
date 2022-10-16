@@ -98,10 +98,10 @@ function Account() {
       width={"100vw"}
       height={"100vh"}
       position={"relative"}
-      backgroundImage={"../Background.png"}
+      backgroundImage={"../Background_Login.png"}
     >
       <Box
-        width={"650px"}
+        width={{ md: "650px", sm: "93%" }}
         bg="rgb(233,224,182)"
         borderRadius={"50px"}
         border={"11px solid white"}
@@ -117,11 +117,13 @@ function Account() {
           <SlideFade in={true} offsetX="20px" offsetY={0}>
             <VStack width={"inherit"} spacing={4}>
               <FormControl>
-                <FormLabel fontSize={"25px"}>Username</FormLabel>
+                <FormLabel fontSize={{ md: "25px", sm: "20px" }}>
+                  Username
+                </FormLabel>
                 <Input
                   flex={1}
                   borderColor={"black"}
-                  fontSize={"28px"}
+                  fontSize={{ md: "28px", sm: "23px" }}
                   outlineOffset={"-2px"}
                   outline={`5px solid ${errors.username ? "red" : "black"}`}
                   _focus={{ border: "1px solid black" }}
@@ -144,11 +146,13 @@ function Account() {
                 )}
               </FormControl>
               <FormControl>
-                <FormLabel fontSize={"25px"}>E-mail</FormLabel>
+                <FormLabel fontSize={{ md: "25px", sm: "20px" }}>
+                  E-mail
+                </FormLabel>
                 <Input
                   flex={1}
                   borderColor={"black"}
-                  fontSize={"28px"}
+                  fontSize={{ md: "28px", sm: "23px" }}
                   outlineOffset={"-2px"}
                   outline={`5px solid ${errors.email ? "red" : "black"}`}
                   _focus={{ border: "1px solid black" }}
@@ -176,11 +180,13 @@ function Account() {
                 )}
               </FormControl>
               <FormControl>
-                <FormLabel fontSize={"25px"}>Password</FormLabel>
+                <FormLabel fontSize={{ md: "25px", sm: "20px" }}>
+                  Password
+                </FormLabel>
                 <Input
                   flex={1}
                   borderColor={"black"}
-                  fontSize={"28px"}
+                  fontSize={{ md: "28px", sm: "23px" }}
                   outlineOffset={"-2px"}
                   outline={`5px solid ${errors.password ? "red" : "black"}`}
                   _focus={{ border: "1px solid black" }}
@@ -208,11 +214,13 @@ function Account() {
                 )}
               </FormControl>
               <FormControl isInvalid={errors.confirmPassword ? true : false}>
-                <FormLabel fontSize={"25px"}>Confirm password</FormLabel>
+                <FormLabel fontSize={{ md: "25px", sm: "20px" }}>
+                  Confirm password
+                </FormLabel>
                 <Input
                   flex={1}
                   borderColor={"black"}
-                  fontSize={"28px"}
+                  fontSize={{ md: "28px", sm: "23px" }}
                   outlineOffset={"-2px"}
                   outline={`5px solid ${
                     errors.confirmPassword ? "red" : "black"
@@ -238,17 +246,16 @@ function Account() {
             </VStack>
           </SlideFade>
           <HStack
-            spacing={"14"}
+            spacing={{ md: "14", sm: "5" }}
             position={"absolute"}
             width={"100%"}
             justifyContent={"center"}
-            bottom={{ lg: "-4vh", md: "-3vh" }}
+            bottom={{ md: "-3vh", sm: "-4vh" }}
             left={0}
-            height={{ lg: "80px", md: "70px" }}
+            height={{ lg: "80px", md: "75px", sm: "70px" }}
           >
             <Button
-              width={"35%"}
-              onClick={handleBackToLogin}
+              width={{ md: "35%", sm: "40%" }}
               height={"full"}
               variant={"unstyled"}
               borderRadius={"24px"}
@@ -258,22 +265,28 @@ function Account() {
               background={
                 "radial-gradient(300px 65px at bottom center, rgba(30,117,187,1) 80%, rgba(98,159,208,1) 90%, rgba(98,159,208,1) 100%)"
               }
+              _loading={{
+                background:
+                  "radial-gradient(300px 65px at bottom center, rgba(30,117,187,1) 80%, rgba(98,159,208,1) 90%, rgba(98,159,208,1) 100%)",
+              }}
               _hover={{
                 background:
                   "radial-gradient(300px 65px at bottom center, rgba(30,117,187,1) 80%, rgba(98,159,208,1) 90%, rgba(98,159,208,1) 100%)",
               }}
-              fontSize={"3xl"}
+              fontSize={{ sm: "xl", md: "3xl" }}
               color={"white"}
               display={"flex"}
+              onClick={handleBackToLogin}
             >
               Cancel
             </Button>
             <Button
-              width={"35%"}
-              type={"submit"}
+              width={{ md: "35%", sm: "40%" }}
+              type="submit"
               height={"full"}
               variant={"unstyled"}
               borderRadius={"24px"}
+              isLoading={isLoading}
               border={"8px solid white"}
               outline={"5px solid black"}
               outlineOffset={"-9px"}
@@ -288,10 +301,9 @@ function Account() {
                 background:
                   "radial-gradient(300px 65px at bottom center, rgba(249,175,26,1) 80%, rgba(251,199,95,1) 90%, rgba(251,199,95,1) 100%)",
               }}
-              fontSize={"3xl"}
+              fontSize={{ sm: "xl", md: "3xl" }}
               color={"white"}
               display={"flex"}
-              isLoading={isLoading}
             >
               Register
             </Button>

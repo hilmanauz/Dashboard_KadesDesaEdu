@@ -17,6 +17,7 @@ import {
   useDisclosure,
   Button,
   Stack,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import React from "react";
 import Scrollbars from "rc-scrollbars";
@@ -27,7 +28,7 @@ import { deleteCookie, getCookie } from "cookies-next";
 import useClient from "../engines/useClient";
 import Link from "next/link";
 
-const size = { lg: "lg", md: "md", sm: "sm" };
+export const size = { lg: "lg", md: "md", sm: "sm" };
 
 const imageSize = { lg: "220px", md: "170px", sm: "120px" };
 
@@ -36,6 +37,7 @@ const paddingContainer = { lg: "200px", md: "150px", sm: "100px" };
 function LandingPage() {
   const client = useClient();
   const dataLogin = client.getUserData();
+  const isMobile = useBreakpointValue({ sm: true, md: true, lg: false });
   const validateToken = client.validateEntityToken();
   const EntityToken = getCookie("EntityToken");
   const isLogin = React.useMemo(
@@ -55,24 +57,36 @@ function LandingPage() {
         <Scrollbars style={{ height, width }}>
           <Box h="full" w="full" position="relative">
             <VStack alignItems={"normal"} spacing={0}>
-              <HStack
+              <Stack
                 height={"100vh"}
                 backgroundSize={"cover"}
                 backgroundRepeat={"no-repeat"}
                 backgroundPosition={"center"}
                 position={"relative"}
-                backgroundImage={"./Background_Title.png"}
-                paddingRight={{ lg: "100px", md: "60px", sm: "50px" }}
+                direction={{ sm: "column", lg: "row" }}
+                backgroundImage={{
+                  sm: "./Background_Mobile.png",
+                  lg: "./Background_Title.png",
+                }}
+                style={
+                  isMobile
+                    ? {
+                        justifyContent: "center",
+                        alignContent: "center",
+                      }
+                    : {}
+                }
+                paddingRight={{ lg: "100px", md: "60px", sm: "0px" }}
               >
                 {!isLogin ? (
                   <Box
                     position={"absolute"}
                     top={"30px"}
-                    right={{ lg: "100px", md: "60px", sm: "50px" }}
+                    right={{ lg: "100px", md: "60px", sm: "30px" }}
                   >
                     <Link href={"/login"}>
                       <Button
-                        width={{ sm: "150px", md: "200px", lg: "230px" }}
+                        width={{ sm: "120px", md: "200px", lg: "230px" }}
                         height={{ sm: "50px", md: "70px" }}
                         variant={"unstyled"}
                         borderRadius={{ lg: "24px", md: "18px", sm: "15px" }}
@@ -99,16 +113,20 @@ function LandingPage() {
                     </Link>
                   </Box>
                 ) : (
-                  <Box position={"absolute"} top={"30px"} right={"100px"}>
+                  <Box
+                    position={"absolute"}
+                    top={"30px"}
+                    right={{ lg: "100px", md: "60px", sm: "30px" }}
+                  >
                     <Button
-                      width={{ sm: "150px", md: "200px", lg: "230px" }}
+                      width={{ sm: "120px", md: "200px", lg: "230px" }}
                       height={{ sm: "50px", md: "70px" }}
                       variant={"unstyled"}
                       borderRadius={{ lg: "24px", md: "18px", sm: "15px" }}
                       border={"8px solid white"}
                       outline={"5px solid black"}
-                      onClick={handleSignOut}
                       outlineOffset={"-9px"}
+                      onClick={handleSignOut}
                       background={
                         "radial-gradient(300px 65px at bottom center, rgba(249,175,26,1) 80%, rgba(251,199,95,1) 90%, rgba(251,199,95,1) 100%)"
                       }
@@ -120,7 +138,7 @@ function LandingPage() {
                         background:
                           "radial-gradient(300px 65px at bottom center, rgba(249,175,26,1) 80%, rgba(251,199,95,1) 90%, rgba(251,199,95,1) 100%)",
                       }}
-                      fontSize={"3xl"}
+                      fontSize={{ lg: "3xl", md: "2xl", sm: "xl" }}
                       color={"white"}
                       display={"flex"}
                     >
@@ -128,15 +146,22 @@ function LandingPage() {
                     </Button>
                   </Box>
                 )}
-                <Spacer />
-                <Box width={"43vw"} flexDirection={"column"}>
+                {!isMobile && <Spacer />}
+                <Center
+                  paddingTop={{ sm: isLogin ? "40vh" : "25%", lg: 0 }}
+                  width={{ sm: "99vw", lg: "43vw" }}
+                  flexDirection={"column"}
+                >
                   <Image src={"./Logo.png"} alt={"logo"} objectFit={"cover"} />
                   {isLogin && (
-                    <VStack marginTop={"50px"} spacing={"30px"}>
+                    <VStack
+                      marginTop={{ sm: "10px", lg: "50px" }}
+                      spacing={{ sm: "10px", lg: "30px" }}
+                    >
                       <Button
-                        width={{ lg: "55%", md: "100%", sm: "100%" }}
+                        width={"100%"}
                         bgColor={"#BE9770"}
-                        paddingX={"80px"}
+                        paddingX={{ md: "80px", sm: "20px" }}
                         paddingY={"30px"}
                         onClick={() =>
                           Router.push(
@@ -169,22 +194,23 @@ function LandingPage() {
                           <Image
                             src="./Desktop_Icon.png"
                             alt="Desktop_Icon"
-                            width={"2.2vw"}
+                            width={{ md: "2.2vw", sm: "7.5vw" }}
                           />
-                          <Text
+                          <Heading
                             marginY={"auto !important"}
                             height={"full"}
                             lineHeight={"0"}
                             size={size}
+                            fontSize={{ sm: "20px" }}
                           >
                             Link From Desktop
-                          </Text>
+                          </Heading>
                         </HStack>
                       </Button>
                       <Button
-                        width={{ lg: "55%", md: "100%", sm: "100%" }}
+                        width={"100%"}
                         bgColor={"#BE9770"}
-                        paddingX={"80px"}
+                        paddingX={{ md: "80px", sm: "20px" }}
                         paddingY={"30px"}
                         onClick={() =>
                           Router.push(
@@ -217,22 +243,23 @@ function LandingPage() {
                           <Image
                             src="./Mobile_Icon.png"
                             alt="Mobile_Icon"
-                            width={{ lg: "1.8vw", md: "2vw" }}
+                            width={{ lg: "1.8vw", md: "2vw", sm: "5vw" }}
                           />
-                          <Text
+                          <Heading
                             marginY={"auto !important"}
                             height={"full"}
                             lineHeight={"0"}
                             size={size}
+                            fontSize={{ sm: "20px" }}
                           >
                             Link From Mobile
-                          </Text>
+                          </Heading>
                         </HStack>
                       </Button>
                       <Button
-                        width={{ lg: "55%", md: "100%", sm: "100%" }}
+                        width={"100%"}
                         bgColor={"#BE9770"}
-                        paddingX={"80px"}
+                        paddingX={{ md: "80px", sm: "20px" }}
                         paddingY={"30px"}
                         onClick={() => Router.push("/dashboard")}
                         color={"white"}
@@ -261,27 +288,29 @@ function LandingPage() {
                           <Image
                             src="./Dashboard_Icon.png"
                             alt="Dashboard_Icon"
-                            width={{ lg: "1.8vw", md: "2vw" }}
+                            width={{ lg: "1.8vw", md: "2vw", sm: "5vw" }}
                           />
-                          <Text
+                          <Heading
                             marginY={"auto !important"}
                             height={"full"}
                             lineHeight={"0"}
                             size={size}
+                            fontSize={{ sm: "20px" }}
                           >
                             Link From Dashboard
-                          </Text>
+                          </Heading>
                         </HStack>
                       </Button>
                     </VStack>
                   )}
-                </Box>
-              </HStack>
+                </Center>
+              </Stack>
               <Box
                 backgroundImage={"./Background_kertas.png"}
                 backgroundSize={"cover"}
                 backgroundRepeat={"no-repeat"}
                 backgroundPosition={"center"}
+                borderTop={"5px solid black"}
                 position={"relative"}
                 width={"full"}
                 paddingY={paddingContainer}
@@ -292,7 +321,7 @@ function LandingPage() {
                     <Center
                       width={"full"}
                       height={{ lg: "80vh", md: "45vh", sm: "40vh" }}
-                      borderRadius={"30px"}
+                      borderRadius={{ sm: "15px", lg: "30px" }}
                       bgColor={"#f9f3ea"}
                       boxShadow={
                         "0 20px 0 0 rgb(0 0 0 / 15%), 0 0 20px 0 rgb(0 0 0 / 14%)"
@@ -545,6 +574,7 @@ function LandingPage() {
                 backgroundSize={"cover"}
                 backgroundImage={"./Background_Everidea.png"}
                 color={"white"}
+                borderTop={"5px solid black"}
               >
                 <Center height={"450px"}>
                   <Container maxW={{ md: "2xl", lg: "80vw" }}>
@@ -580,14 +610,17 @@ function LandingPage() {
                       </VStack>
                     </GridItem> */}
                       <GridItem w="100%">
-                        <HStack gap={10}>
-                          <Box width={"50%"}>
+                        <Stack
+                          flexDirection={{ sm: "row", md: "column", lg: "row" }}
+                          gap={10}
+                        >
+                          <Box width={{ sm: "50%", md: "100%", lg: "50%" }}>
                             <Image src={"./EI.png"} alt={"Logo_EI"} />
                           </Box>
-                          <Box width={"50%"}>
+                          <Box width={{ sm: "50%", md: "100%", lg: "50%" }}>
                             <Image src={"./Edu.png"} alt={"Logo_Edu"} />
                           </Box>
-                        </HStack>
+                        </Stack>
                       </GridItem>
                     </Grid>
                   </Container>

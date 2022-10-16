@@ -1,6 +1,5 @@
 import axios, { AxiosResponse } from "axios";
 import useSWR from "swr";
-import Cookies from 'js-cookie';
 import { LoginForm } from "../pages/dashboard";
 import { RegisterForm } from "../pages/registers/account";
 import { getCookie } from "cookies-next";
@@ -103,6 +102,13 @@ export default function useClient() {
         );
         return { dataLogin: dataLogin.data?.data?.Data, accountInfo: accountInfo.data?.data?.AccountInfo };
       })
+    },
+    forgot: async (email: string) => {
+      const forgot = await axios.post(
+        `https://${TitleId}.playfabapi.com/Client/SendAccountRecoveryEmail`,
+        { Email: email, TitleId }
+      );
+      return forgot.data;
     },
     updatePlayerData: async (data: any, SessionTicket: string) => {
       await axios.post(

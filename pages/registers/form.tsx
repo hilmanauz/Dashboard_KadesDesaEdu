@@ -113,10 +113,10 @@ function Form() {
       width={"100vw"}
       height={"100vh"}
       position={"relative"}
-      backgroundImage={"../Background.png"}
+      backgroundImage={"../Background_Login.png"}
     >
       <Box
-        width={"650px"}
+        width={{ sm: "95%", md: "650px" }}
         bg="rgb(233,224,182)"
         borderRadius={"50px"}
         border={"11px solid white"}
@@ -132,11 +132,13 @@ function Form() {
           <SlideFade in={true} offsetX="20px" offsetY={0}>
             <VStack width={"inherit"} spacing={4}>
               <FormControl>
-                <FormLabel fontSize={"25px"}>Nama</FormLabel>
+                <FormLabel fontSize={{ md: "25px", sm: "20px" }}>
+                  Nama
+                </FormLabel>
                 <Input
                   flex={1}
                   borderColor={"black"}
-                  fontSize={"28px"}
+                  fontSize={{ md: "28px", sm: "23px" }}
                   outline={"5px solid black"}
                   _focus={{ border: "1px solid black" }}
                   _hover={{ border: "1px solid black" }}
@@ -147,11 +149,13 @@ function Form() {
               </FormControl>
               <HStack width={"inherit"} spacing={"8"}>
                 <FormControl width={"50%"}>
-                  <FormLabel fontSize={"25px"}>Umur</FormLabel>
+                  <FormLabel fontSize={{ md: "25px", sm: "20px" }}>
+                    Umur
+                  </FormLabel>
                   <Input
                     flex={1}
                     borderColor={"black"}
-                    fontSize={"28px"}
+                    fontSize={{ md: "28px", sm: "23px" }}
                     outline={"5px solid black"}
                     _focus={{ border: "1px solid black" }}
                     _hover={{ border: "1px solid black" }}
@@ -163,7 +167,10 @@ function Form() {
                   />
                 </FormControl>
                 <FormControl width={"50%"}>
-                  <FormLabel fontSize={"25px"} noOfLines={1}>
+                  <FormLabel
+                    fontSize={{ md: "25px", sm: "18px" }}
+                    noOfLines={1}
+                  >
                     Jenis Kelamin
                   </FormLabel>
                   <CustomSelect
@@ -181,12 +188,12 @@ function Form() {
                 </FormControl>
               </HStack>
               <FormControl>
-                <FormLabel fontSize={"25px"}>NIP</FormLabel>
+                <FormLabel fontSize={{ md: "25px", sm: "20px" }}>NIP</FormLabel>
                 <Input
                   flex={1}
                   type={"number"}
                   borderColor={"black"}
-                  fontSize={"28px"}
+                  fontSize={{ md: "28px", sm: "23px" }}
                   outline={"5px solid black"}
                   _focus={{ border: "1px solid black" }}
                   _hover={{ border: "1px solid black" }}
@@ -197,11 +204,13 @@ function Form() {
                 />
               </FormControl>
               <FormControl>
-                <FormLabel fontSize={"25px"}>Institusi</FormLabel>
+                <FormLabel fontSize={{ md: "25px", sm: "20px" }}>
+                  Institusi
+                </FormLabel>
                 <Input
                   flex={1}
                   borderColor={"black"}
-                  fontSize={"28px"}
+                  fontSize={{ md: "28px", sm: "23px" }}
                   outline={"5px solid black"}
                   _focus={{ border: "1px solid black" }}
                   _hover={{ border: "1px solid black" }}
@@ -211,11 +220,13 @@ function Form() {
                 />
               </FormControl>
               <FormControl>
-                <FormLabel fontSize={"25px"}>Kota</FormLabel>
+                <FormLabel fontSize={{ md: "25px", sm: "20px" }}>
+                  Kota
+                </FormLabel>
                 <Input
                   flex={1}
                   borderColor={"black"}
-                  fontSize={"28px"}
+                  fontSize={{ md: "28px", sm: "23px" }}
                   outline={"5px solid black"}
                   _focus={{ border: "1px solid black" }}
                   _hover={{ border: "1px solid black" }}
@@ -228,17 +239,16 @@ function Form() {
             </VStack>
           </SlideFade>
           <HStack
-            spacing={"14"}
+            spacing={{ md: "14", sm: "5" }}
             position={"absolute"}
             width={"100%"}
             justifyContent={"center"}
-            bottom={{ lg: "-4vh", md: "-3vh" }}
+            bottom={{ md: "-3vh", sm: "-4vh" }}
             left={0}
-            height={{ lg: "80px", md: "70px" }}
+            height={{ lg: "80px", md: "75px", sm: "70px" }}
           >
             <Button
-              width={"35%"}
-              onClick={handleToLogin}
+              width={{ md: "35%", sm: "40%" }}
               height={"full"}
               variant={"unstyled"}
               borderRadius={"24px"}
@@ -248,22 +258,28 @@ function Form() {
               background={
                 "radial-gradient(300px 65px at bottom center, rgba(30,117,187,1) 80%, rgba(98,159,208,1) 90%, rgba(98,159,208,1) 100%)"
               }
+              _loading={{
+                background:
+                  "radial-gradient(300px 65px at bottom center, rgba(30,117,187,1) 80%, rgba(98,159,208,1) 90%, rgba(98,159,208,1) 100%)",
+              }}
               _hover={{
                 background:
                   "radial-gradient(300px 65px at bottom center, rgba(30,117,187,1) 80%, rgba(98,159,208,1) 90%, rgba(98,159,208,1) 100%)",
               }}
-              fontSize={"3xl"}
+              fontSize={{ sm: "xl", md: "3xl" }}
               color={"white"}
               display={"flex"}
+              onClick={handleToLogin}
             >
               Cancel
             </Button>
             <Button
-              width={"35%"}
-              type={"submit"}
+              width={{ md: "35%", sm: "40%" }}
+              type="submit"
               height={"full"}
               variant={"unstyled"}
               borderRadius={"24px"}
+              isLoading={isLoading}
               border={"8px solid white"}
               outline={"5px solid black"}
               outlineOffset={"-9px"}
@@ -278,12 +294,11 @@ function Form() {
                 background:
                   "radial-gradient(300px 65px at bottom center, rgba(249,175,26,1) 80%, rgba(251,199,95,1) 90%, rgba(251,199,95,1) 100%)",
               }}
-              fontSize={"3xl"}
+              fontSize={{ sm: "xl", md: "3xl" }}
               color={"white"}
               display={"flex"}
-              isLoading={isLoading}
             >
-              Submit
+              Register
             </Button>
           </HStack>
         </form>

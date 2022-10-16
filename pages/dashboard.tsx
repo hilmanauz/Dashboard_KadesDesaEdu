@@ -4,7 +4,7 @@ import type {
   NextPage,
 } from "next";
 import React from "react";
-import { Center, Grid } from "@chakra-ui/react";
+import { Center, Grid, useBreakpointValue } from "@chakra-ui/react";
 import Router from "next/router";
 import _ from "lodash";
 import useClient, { TitleId } from "../engines/useClient";
@@ -36,22 +36,25 @@ const Home = (
     props.dataLogin,
     props.error,
   ]);
+  const isMobile = useBreakpointValue({ sm: true, md: false });
 
   if (!props.dataLogin?.profile) return <></>;
 
   return (
     <Center
       width={"100vw"}
-      height={"100vh"}
+      height={{ lg: "100vh", sm: "auto" }}
       position={"relative"}
       backgroundImage={"../Background.png"}
     >
       <Grid
-        height={"90%"}
+        height={{ lg: "100%", sm: "auto" }}
+        paddingY={{ md: "3%", sm: "6%" }}
         width={"90%"}
-        templateRows="repeat(15, 1fr)"
-        templateColumns="repeat(5, 1fr)"
-        gap={{ lg: 10, md: 6 }}
+        overflowY={{ sm: "auto", lg: "unset" }}
+        templateRows={{ lg: "repeat(15, 1fr)", sm: "repeat(20, 1fr)" }}
+        templateColumns={{ lg: "repeat(5, 1fr)", sm: "repeat(1, 1fr)" }}
+        gap={{ lg: 10, md: 8, sm: 6 }}
       >
         <Profile userData={props} />
         <Status userData={props} />

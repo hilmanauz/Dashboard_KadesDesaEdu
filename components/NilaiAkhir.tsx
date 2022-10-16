@@ -72,10 +72,10 @@ function NilaiAkhir({
 
   return (
     <GridItem
-      colSpan={2}
+      colSpan={{ lg: 2, sm: 1 }}
       rowSpan={8}
       bg="rgb(233,224,182)"
-      borderRadius={"50px"}
+      borderRadius={{ sm: "30px", lg: "50px" }}
       border={"11px solid white"}
       outline={"6px solid black"}
       outlineOffset={"-11px"}
@@ -83,10 +83,15 @@ function NilaiAkhir({
       backgroundImage={"./Artboard.png"}
       backgroundSize={"cover"}
     >
-      <Center height={"100%"} paddingX={"20px"} paddingTop={"20px"}>
+      <Center
+        height={"100%"}
+        paddingX={"20px"}
+        paddingTop={{ sm: "0px", lg: "20px" }}
+        paddingY={{ sm: "20px", lg: "0px" }}
+      >
         <Box
           position={"absolute"}
-          top={{ md: -5, lg: -8 }}
+          top={{ sm: -5, md: -6, lg: -8 }}
           left={0}
           right={0}
           textAlign={"center"}
@@ -105,8 +110,8 @@ function NilaiAkhir({
           >
             <Heading
               color={"white"}
-              paddingInline={"2vw"}
-              fontSize={{ base: "1.5vw", md: "2.2vw", lg: "2.2vw" }}
+              paddingInline={{ sm: "6vw", lg: "2vw" }}
+              fontSize={{ base: "16px", md: "22px", lg: "2.2vw" }}
             >
               Nilai Akhir
             </Heading>
@@ -114,13 +119,13 @@ function NilaiAkhir({
         </Box>
         <VStack justifyContent={"center"}>
           {userData.dataLogin.level1.Value === "False" ? (
-            <Center boxSize={"75%"}>
+            <Center boxSize={{ sm: "75%", md: "55%", lg: "75%" }}>
               <Image src={"./Empty_state.png"} alt="Dan Abramov" />
             </Center>
           ) : (
             <VStack height={"100%"} width={"100%"}>
               <Center flexDirection={"column"}>
-                <Heading fontSize={{ base: "0.5vw", md: "1.5vw", lg: "1.5vw" }}>
+                <Heading fontSize={{ sm: "3.5vw", md: "2.5vw", lg: "1.5vw" }}>
                   Nilai akhir anda adalah
                 </Heading>
               </Center>
@@ -135,14 +140,14 @@ function NilaiAkhir({
                 </Center>
                 <VStack width={"72%"}>
                   <Heading
-                    fontSize={{ base: "0.5vw", md: "1.4vw", lg: "1.5vw" }}
+                    fontSize={{ sm: "3.5vw", md: "2.5vw", lg: "1.5vw" }}
                     letterSpacing={"0.3px"}
                   >
                     DISC Personality: {personalityResult?.[1].title}
                   </Heading>
                   <Text
                     height={"full"}
-                    fontSize={{ base: "0.8vw", md: "1.1vw", lg: "1.1vw" }}
+                    fontSize={{ sm: "2.5vw", md: "2.2vw", lg: "1.1vw" }}
                     css={css`
                       @media only screen and (min-width: 1280px) and (max-width: 1440px) {
                         font-size: 1vw;
@@ -152,7 +157,7 @@ function NilaiAkhir({
                     `}
                     letterSpacing={"0.3px"}
                     textAlign={"justify"}
-                    lineHeight={{ base: "6", md: "tall", lg: "6" }}
+                    lineHeight={{ base: "2", md: "tall", lg: "6" }}
                   >
                     {personalityResult?.[1].description}
                   </Text>

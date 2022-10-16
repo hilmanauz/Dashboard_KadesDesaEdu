@@ -15,6 +15,7 @@ import Cookies from "js-cookie";
 import Router from "next/router";
 import React from "react";
 import { SWRResponse } from "swr";
+import { size } from "./LandingPage";
 
 const profileTitle = [
   "Nama",
@@ -50,10 +51,10 @@ function Profile({
 
   return (
     <GridItem
-      colSpan={2}
+      colSpan={{ sm: 1, lg: 2 }}
       rowSpan={7}
       bg="rgb(233,224,182)"
-      borderRadius={"50px"}
+      borderRadius={{ sm: "30px", lg: "50px" }}
       border={"11px solid white"}
       outline={"6px solid black"}
       outlineOffset={"-11px"}
@@ -67,7 +68,7 @@ function Profile({
     >
       <Box
         position={"absolute"}
-        top={{ md: -6, lg: -8 }}
+        top={{ sm: -5, md: -6, lg: -8 }}
         left={0}
         right={0}
         textAlign={"center"}
@@ -76,7 +77,7 @@ function Profile({
           width={"fit-content"}
           marginLeft={"auto"}
           marginRight={"auto"}
-          borderRadius={"16px"}
+          borderRadius={{ sm: "14px", lg: "16px" }}
           border={"5px solid white"}
           outline={"3px solid black"}
           outlineOffset={"-6px"}
@@ -86,8 +87,8 @@ function Profile({
         >
           <Heading
             color={"white"}
-            paddingInline={"2vw"}
-            fontSize={{ base: "1.5vw", md: "2.2vw", lg: "2.2vw" }}
+            paddingInline={{ sm: "6vw", lg: "2vw" }}
+            fontSize={{ base: "16px", md: "22px", lg: "2.2vw" }}
           >
             Profile
           </Heading>
@@ -95,11 +96,11 @@ function Profile({
       </Box>
       <Center height={"100%"} width={"100%"}>
         <HStack flex={1} height={"100%"} spacing={0}>
-          <Center width={{ base: "25%", md: "33%", lg: "25%" }} height={"full"}>
+          <Center width={{ sm: "30%", md: "25%", lg: "25%" }} height={"full"}>
             <Image src="./PakKades.png" alt="Dan Abramov" width={"full"} />
           </Center>
           <VStack
-            width={{ base: "75%", md: "67%", lg: "75%" }}
+            width={{ base: "100%", lg: "75%" }}
             height={"full"}
             spacing={0}
           >
@@ -111,16 +112,14 @@ function Profile({
             >
               {profile?.map((section) => (
                 <HStack key={section.value}>
-                  <Heading
-                    fontSize={{ base: "0.5vw", md: "1.6vw", lg: "1.5vw" }}
-                  >
+                  <Heading fontSize={{ base: "15px", md: "25px", lg: "1.5vw" }}>
                     {section.title}:
                   </Heading>
                   <Text
                     flex={1}
                     fontSize={{
-                      base: "0.25vw",
-                      md: "1.3vw",
+                      base: "12px",
+                      md: "23px",
                       lg: "1.25vw",
                     }}
                   >
@@ -135,8 +134,9 @@ function Profile({
               colorScheme={"red"}
               padding={"10px"}
               onClick={handleSignOut}
+              size={{ ...size, sm: "xs" }}
             >
-              <Heading fontSize={["sm", "xl"]}>Sign Out</Heading>
+              Sign Out
             </Button>
           </VStack>
         </HStack>

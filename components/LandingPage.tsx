@@ -18,6 +18,9 @@ import {
   Button,
   Stack,
   useBreakpointValue,
+  FormHelperText,
+  FormControl,
+  Icon,
 } from "@chakra-ui/react";
 import React from "react";
 import Scrollbars from "rc-scrollbars";
@@ -156,106 +159,130 @@ function LandingPage() {
                   {isLogin && (
                     <VStack
                       marginTop={{ sm: "10px", lg: "50px" }}
-                      spacing={{ sm: "10px", lg: "30px" }}
+                      spacing={{ sm: "10px", lg: "15px" }}
                     >
-                      <Button
-                        width={"100%"}
-                        bgColor={"#BE9770"}
-                        paddingX={{ md: "80px", sm: "20px" }}
-                        paddingY={"30px"}
-                        onClick={() =>
-                          Router.push(
-                            "https://play.everidea.id/games/desakita/"
-                          )
-                        }
-                        color={"white"}
-                        borderRadius={"24px"}
-                        border={"8px solid white"}
-                        outline={"5px solid black"}
-                        outlineOffset={"-9px"}
-                        background={
-                          "radial-gradient(300px 65px at bottom center, rgba(30,117,187,1) 80%, rgba(98,159,208,1) 90%, rgba(98,159,208,1) 100%)"
-                        }
-                        _loading={{
-                          background:
-                            "radial-gradient(300px 65px at bottom center, rgba(30,117,187,1) 80%, rgba(98,159,208,1) 90%, rgba(98,159,208,1) 100%)",
-                        }}
-                        _hover={{
-                          background:
-                            "radial-gradient(300px 65px at bottom center, rgba(30,117,187,1) 80%, rgba(98,159,208,1) 90%, rgba(98,159,208,1) 100%)",
-                        }}
-                        _active={{
-                          background:
-                            "radial-gradient(300px 65px at bottom center, rgba(30,117,187,1) 80%, rgba(98,159,208,1) 90%, rgba(98,159,208,1) 100%)",
-                          boxShadow: "none",
-                        }}
-                      >
-                        <HStack justifyContent={"center"} gap={"10px"}>
-                          <Image
-                            src="./Desktop_Icon.png"
-                            alt="Desktop_Icon"
-                            width={{ md: "2.2vw", sm: "7.5vw" }}
-                          />
-                          <Heading
-                            marginY={"auto !important"}
-                            height={"full"}
-                            lineHeight={"0"}
-                            size={size}
-                            fontSize={{ sm: "20px" }}
-                          >
-                            Link From Desktop
-                          </Heading>
-                        </HStack>
-                      </Button>
-                      <Button
-                        width={"100%"}
-                        bgColor={"#BE9770"}
-                        paddingX={{ md: "80px", sm: "20px" }}
-                        paddingY={"30px"}
-                        onClick={() =>
-                          Router.push(
-                            "https://play.everidea.id/games/mobile/desakita/"
-                          )
-                        }
-                        color={"white"}
-                        borderRadius={"24px"}
-                        border={"8px solid white"}
-                        outline={"5px solid black"}
-                        outlineOffset={"-9px"}
-                        background={
-                          "radial-gradient(300px 65px at bottom center, rgba(30,117,187,1) 80%, rgba(98,159,208,1) 90%, rgba(98,159,208,1) 100%)"
-                        }
-                        _loading={{
-                          background:
-                            "radial-gradient(300px 65px at bottom center, rgba(30,117,187,1) 80%, rgba(98,159,208,1) 90%, rgba(98,159,208,1) 100%)",
-                        }}
-                        _hover={{
-                          background:
-                            "radial-gradient(300px 65px at bottom center, rgba(30,117,187,1) 80%, rgba(98,159,208,1) 90%, rgba(98,159,208,1) 100%)",
-                        }}
-                        _active={{
-                          background:
-                            "radial-gradient(300px 65px at bottom center, rgba(30,117,187,1) 80%, rgba(98,159,208,1) 90%, rgba(98,159,208,1) 100%)",
-                          boxShadow: "none",
-                        }}
-                      >
-                        <HStack justifyContent={"center"} gap={"10px"}>
-                          <Image
-                            src="./Mobile_Icon.png"
-                            alt="Mobile_Icon"
-                            width={{ lg: "1.8vw", md: "2vw", sm: "5vw" }}
-                          />
-                          <Heading
-                            marginY={"auto !important"}
-                            height={"full"}
-                            lineHeight={"0"}
-                            size={size}
-                            fontSize={{ sm: "20px" }}
-                          >
-                            Link From Mobile
-                          </Heading>
-                        </HStack>
-                      </Button>
+                      <FormControl>
+                        <Button
+                          width={"100%"}
+                          bgColor={"#BE9770"}
+                          paddingX={{ md: "80px", sm: "20px" }}
+                          paddingY={"30px"}
+                          onClick={() =>
+                            Router.push(
+                              "https://play.everidea.id/games/desakita/"
+                            )
+                          }
+                          disabled
+                          color={"white"}
+                          borderRadius={"24px"}
+                          border={"8px solid white"}
+                          outline={"5px solid black"}
+                          outlineOffset={"-9px"}
+                          background={
+                            "radial-gradient(300px 65px at bottom center, rgba(30,117,187,1) 80%, rgba(98,159,208,1) 90%, rgba(98,159,208,1) 100%)"
+                          }
+                          _loading={{
+                            background:
+                              "radial-gradient(300px 65px at bottom center, rgba(30,117,187,1) 80%, rgba(98,159,208,1) 90%, rgba(98,159,208,1) 100%)",
+                          }}
+                          _hover={{
+                            background:
+                              "radial-gradient(300px 65px at bottom center, rgba(30,117,187,1) 80%, rgba(98,159,208,1) 90%, rgba(98,159,208,1) 100%)",
+                          }}
+                          _active={{
+                            background:
+                              "radial-gradient(300px 65px at bottom center, rgba(30,117,187,1) 80%, rgba(98,159,208,1) 90%, rgba(98,159,208,1) 100%)",
+                            boxShadow: "none",
+                          }}
+                        >
+                          <HStack justifyContent={"center"} gap={"10px"}>
+                            <Image
+                              src="./Desktop_Icon.png"
+                              alt="Desktop_Icon"
+                              width={{ md: "2.2vw", sm: "7.5vw" }}
+                            />
+                            <Heading
+                              marginY={"auto !important"}
+                              height={"full"}
+                              lineHeight={"0"}
+                              size={size}
+                              fontSize={{ sm: "20px" }}
+                            >
+                              Link From Desktop
+                            </Heading>
+                          </HStack>
+                        </Button>
+                        <FormHelperText
+                          textAlign={"center"}
+                          color={"white"}
+                          fontSize={"md"}
+                          fontWeight={"extrabold"}
+                        >
+                          <span style={{ fontSize: "25px" }}>&#9757;</span>{" "}
+                          Under Maintenance
+                        </FormHelperText>
+                      </FormControl>
+                      <FormControl>
+                        <Button
+                          width={"100%"}
+                          bgColor={"#BE9770"}
+                          paddingX={{ md: "80px", sm: "20px" }}
+                          paddingY={"30px"}
+                          onClick={() =>
+                            Router.push(
+                              "https://play.everidea.id/games/mobile/desakita/"
+                            )
+                          }
+                          disabled
+                          color={"white"}
+                          borderRadius={"24px"}
+                          border={"8px solid white"}
+                          outline={"5px solid black"}
+                          outlineOffset={"-9px"}
+                          background={
+                            "radial-gradient(300px 65px at bottom center, rgba(30,117,187,1) 80%, rgba(98,159,208,1) 90%, rgba(98,159,208,1) 100%)"
+                          }
+                          _loading={{
+                            background:
+                              "radial-gradient(300px 65px at bottom center, rgba(30,117,187,1) 80%, rgba(98,159,208,1) 90%, rgba(98,159,208,1) 100%)",
+                          }}
+                          _hover={{
+                            background:
+                              "radial-gradient(300px 65px at bottom center, rgba(30,117,187,1) 80%, rgba(98,159,208,1) 90%, rgba(98,159,208,1) 100%)",
+                          }}
+                          _active={{
+                            background:
+                              "radial-gradient(300px 65px at bottom center, rgba(30,117,187,1) 80%, rgba(98,159,208,1) 90%, rgba(98,159,208,1) 100%)",
+                            boxShadow: "none",
+                          }}
+                        >
+                          <HStack justifyContent={"center"} gap={"10px"}>
+                            <Image
+                              src="./Mobile_Icon.png"
+                              alt="Mobile_Icon"
+                              width={{ lg: "1.8vw", md: "2vw", sm: "5vw" }}
+                            />
+                            <Heading
+                              marginY={"auto !important"}
+                              height={"full"}
+                              lineHeight={"0"}
+                              size={size}
+                              fontSize={{ sm: "20px" }}
+                            >
+                              Link From Mobile
+                            </Heading>
+                          </HStack>
+                        </Button>
+                        <FormHelperText
+                          textAlign={"center"}
+                          color={"white"}
+                          fontSize={"md"}
+                          fontWeight={"extrabold"}
+                        >
+                          <span style={{ fontSize: "25px" }}>&#9757;</span>{" "}
+                          Under Maintenance
+                        </FormHelperText>
+                      </FormControl>
                       <Button
                         width={"100%"}
                         bgColor={"#BE9770"}
